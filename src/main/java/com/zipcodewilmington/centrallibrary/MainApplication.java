@@ -1,35 +1,18 @@
-package com.zipcodewilmington.centralibrary;
+package com.zipcodewilmington.centrallibrary;
 
 /**
  * Created by n3pjk on 6/9/2025.
  */
 public class MainApplication {
 
-    public abstract class Person {
-        private String name;
-        private int age;
-        private String email;
-        private String phoneNumber;
+    public interface Searchable {
+        boolean matchesKeyword(String keyword);
+    }
 
-        public Person(String name, int age, String email, String phoneNumber) {
-            this.name = name;
-            this.age = age;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-        }
-    
-    //Getters
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getEmail() { return email; }
-    public String getPhoneNumber() { return phoneNumber; }
+    public interface Reservable {
+        void reserve();
 
-    // Setters if needed
-    public void setEmail(String email) { this.email = email; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-}
-
-    
-
+        void cancelReserve();
+    }
 
 }
