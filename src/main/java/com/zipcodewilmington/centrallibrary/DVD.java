@@ -8,7 +8,6 @@ public class DVD extends LibraryItem implements Reservable {
     private int duration;
     private boolean isReserved;
 
-    // ✅ Constructor
     public DVD(String id, String title, String location,
             String director, int duration, String rating, String genre) {
 
@@ -21,13 +20,13 @@ public class DVD extends LibraryItem implements Reservable {
         this.genre = genre;
     }
 
-    // ✅ Required by LibraryItem
     @Override
     public String[] getSearchableFields() {
         return new String[] {
                 getTitle(),
                 director,
-                genre
+                genre,
+                rating
         };
     }
 
@@ -46,7 +45,10 @@ public class DVD extends LibraryItem implements Reservable {
         return "DVD";
     }
 
-    // ✅ Required by Reservable
+    public int getDuration() {
+        return duration;
+    }
+
     @Override
     public void reserve() {
         isReserved = true;
@@ -55,5 +57,9 @@ public class DVD extends LibraryItem implements Reservable {
     @Override
     public void cancelReserve() {
         isReserved = false;
+    }
+
+    public boolean isReserved() {
+        return isReserved;
     }
 }

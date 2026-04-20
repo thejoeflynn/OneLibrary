@@ -42,6 +42,10 @@ public abstract class LibraryItem {
         }
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
     public void checkIn() {
         isAvailable = true;
     }
