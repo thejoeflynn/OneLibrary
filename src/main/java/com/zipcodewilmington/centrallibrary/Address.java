@@ -44,4 +44,9 @@ public class Address {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    public String toString() {
+    return street + ", " + city + ", " + state + " " + zipCode;
+    }
+
 }

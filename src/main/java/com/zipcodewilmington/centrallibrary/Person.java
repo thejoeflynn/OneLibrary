@@ -20,6 +20,13 @@ public abstract class Person {
     public String getPhoneNumber() { return phoneNumber; }
 
     // Setters if needed
+    public void setName(String name) { this.name = name; }
+    public void setAge(int age) { this.age = age; }
     public void setEmail(String email) { this.email = email; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String toString() {
+    return name + ", age " + age + ", " + email + ", " + phoneNumber;
+}
+
 }
