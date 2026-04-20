@@ -1,5 +1,25 @@
 package com.zipcodewilmington.centrallibrary;
 
-public class Person {
+public abstract class Person {
+        private String name;
+        private int age;
+        private String email;
+        private String phoneNumber;
+
+        public Person(String name, int age, String email, String phoneNumber) {
+            this.name = name;
+            this.age = age;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+        }
     
+    //Getters
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public String getEmail() { return email; }
+    public String getPhoneNumber() { return phoneNumber; }
+
+    // Setters if needed
+    public void setEmail(String email) { this.email = email; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }
