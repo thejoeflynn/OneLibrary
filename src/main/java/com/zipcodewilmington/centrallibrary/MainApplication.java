@@ -5,14 +5,4 @@ package com.zipcodewilmington.centrallibrary;
  */
 public class MainApplication {
 
-    public interface Searchable {
-        boolean matchesKeyword(String keyword);
-    }
-
-    public interface Reservable {
-        void reserve();
-
-        void cancelReserve();
-    }
-
 }
