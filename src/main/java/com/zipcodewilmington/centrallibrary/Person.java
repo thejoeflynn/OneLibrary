@@ -1,11 +1,6 @@
-package com.zipcodewilmington.centralibrary;
+package com.zipcodewilmington.centrallibrary;
 
-/**
- * Created by n3pjk on 6/9/2025.
- */
-public class MainApplication {
-
-    public abstract class Person {
+public abstract class Person {
         private String name;
         private int age;
         private String email;
@@ -25,11 +20,13 @@ public class MainApplication {
     public String getPhoneNumber() { return phoneNumber; }
 
     // Setters if needed
+    public void setName(String name) { this.name = name; }
+    public void setAge(int age) { this.age = age; }
     public void setEmail(String email) { this.email = email; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String toString() {
+    return name + ", age " + age + ", " + email + ", " + phoneNumber;
 }
-
-    
-
 
 }
