@@ -1,6 +1,4 @@
 package com.zipcodewilmington.OneLibrary;
-
-public class LibraryItem {
     
 public abstract class LibraryItem {
     private String id;
