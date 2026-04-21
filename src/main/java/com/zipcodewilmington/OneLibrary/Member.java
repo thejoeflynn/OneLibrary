@@ -8,9 +8,9 @@ public class Member extends Person {
     private String membershipDate;
     private List <LibraryItem> borrowedItems;
     private double outstandingFees;
-    private String address;
+    private Address address;
 
-    public Member(String name, int age, String email,   String phoneNumber, String memberId, String membershipDate, String address) {
+    public Member(String name, int age, String email,   String phoneNumber, String memberId, String membershipDate, Address address) {
         super(name, age, email, phoneNumber);
         this.memberId = memberId;
         this.membershipDate = membershipDate;
@@ -40,19 +40,13 @@ public class Member extends Person {
             item.checkIn();
             borrowedItems.remove(item);
 
-            double fee = calculatedLateFee(item, daysLate);
+            double fee = item.calculateLateFee(daysLate);
             outstandingFees += fee;
         }
     }
 
-    // Late Fee Logic
-    private double calculatedLateFee(LibraryItem item, int daysLate) {
-        double rate = 0.5; 
-        return daysLate > 0 ? daysLate * rate : 0;
-    }
-
     // Pays Fees
-    public void paysFees(double amount) {
+    public void payFees(double amount) {
         if (amount > 0) {
             outstandingFees -= amount;
             if (outstandingFees < 0) {

@@ -1,6 +1,6 @@
 package com.zipcodewilmington.OneLibrary;
-    
-public abstract class LibraryItem {
+
+public abstract class LibraryItem implements Searchable {
     private String id;
     private String title;
     private String location;
@@ -8,12 +8,12 @@ public abstract class LibraryItem {
 
     // I need this for my periodical class but cant figure out how to get it to work correctly 
 
-    //public LibraryItem(String id, String title, String location) {
-        //setID(id); 
-        //setTitle(title); 
-        //setLocation(location); 
-        //this.isAvailable = true; 
-    //}
+    public LibraryItem(String id, String title, String location) {
+        this.id = id; 
+        this.title = title; 
+        this.location = location; 
+        this.isAvailable = true; 
+    }
 
     public String getId() {
         return id;
