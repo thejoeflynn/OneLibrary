@@ -1,17 +1,32 @@
+<<<<<<< HEAD
 package com.zipcodewilmington.OneLibrary;
     
+=======
+package com.zipcodewilmington.centrallibrary;
+
+>>>>>>> 0505d0d (fixed searchable)
 public abstract class LibraryItem {
     private String id;
     private String title;
     private String location;
     private boolean isAvailable;
 
+<<<<<<< HEAD
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         if (id != null && !id.isEmpty()) {
+=======
+
+    public String getId(){
+        return id;
+    }
+    
+    public void setId(String id) {
+        if(id != null && !id.isEmpty()) {
+>>>>>>> 0505d0d (fixed searchable)
             this.id = id;
         } else {
             System.out.println("Invalid ID");
@@ -23,7 +38,11 @@ public abstract class LibraryItem {
     }
 
     public void setTitle(String title) {
+<<<<<<< HEAD
         if (title != null && !title.isEmpty()) {
+=======
+        if(title != null && !title.isEmpty()) {
+>>>>>>> 0505d0d (fixed searchable)
             this.title = title;
         } else {
             System.out.println("Invalid Title");
@@ -35,6 +54,7 @@ public abstract class LibraryItem {
     }
 
     public void setLocation(String location) {
+<<<<<<< HEAD
         if (location != null && !location.isEmpty()) {
             this.location = location;
         } else {
@@ -46,6 +66,14 @@ public abstract class LibraryItem {
         return isAvailable;
     }
 
+=======
+        if(location != null && !location.isEmpty()) {
+            this.location = location;
+        } else {
+          System.out.println("Invalid Location");
+        }
+    }
+>>>>>>> 0505d0d (fixed searchable)
     public void checkIn() {
         isAvailable = true;
     }
@@ -55,11 +83,18 @@ public abstract class LibraryItem {
     }
 
     public boolean matchesKeyword(String keyword) {
+<<<<<<< HEAD
         if (keyword == null || keyword.isEmpty())
             return false;
         String[] fields = getSearchableFields();
         for (String field : fields) {
             if (field != null && field.toLowerCase().contains(keyword.toLowerCase())) {
+=======
+        if(keyword == null || keyword.isEmpty()) return false;
+        String [] fields = getSearchableFields();
+        for(String field : fields) {
+            if(field != null && field.toLowerCase().contains(keyword.toLowerCase())) {
+>>>>>>> 0505d0d (fixed searchable)
                 return true;
             }
         }
@@ -75,5 +110,8 @@ public abstract class LibraryItem {
     public abstract String getItemType();
 
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0505d0d (fixed searchable)
