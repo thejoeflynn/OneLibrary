@@ -1,4 +1,4 @@
-package com.zipcodewilmington.centrallibrary;
+package com.zipcodewilmington.OneLibrary;
 
 public interface Reservable {
     void reserve();

@@ -1,16 +1,15 @@
-package com.zipcodewilmington.centrallibrary;
+package com.zipcodewilmington.OneLibrary;
 
 import java.util.*;
 
-public class LibraryMember extends Person {
+public class Member extends Person {
     private String memberId;
     private String membershipDate;
-    private List<LibraryItem> borrowedItems;
+    private List <LibraryItem> borrowedItems;
     private double outstandingFees;
     private String address;
 
-    public LibraryMember(String name, int age, String email, String phoneNumber,
-                         String memberId, String membershipDate, String address) {
+    public Member(String name, int age, String email,   String phoneNumber, String memberId, String membershipDate, String address) {
         super(name, age, email, phoneNumber);
         this.memberId = memberId;
         this.membershipDate = membershipDate;
@@ -18,7 +17,7 @@ public class LibraryMember extends Person {
         this.borrowedItems = new ArrayList<>();
         this.outstandingFees = 0.0;
     }
-
+    
     public String getMemberId() { return memberId; }
     public double getOutstandingFees() { return outstandingFees; }
 
@@ -26,7 +25,7 @@ public class LibraryMember extends Person {
         return new ArrayList<>(borrowedItems); // protect internal list
     }
 
-    // Borrow item
+    // Borrow Item
     public void borrowItem(LibraryItem item) {
         if (item.isAvailable()) {
             item.checkOut();
@@ -34,25 +33,25 @@ public class LibraryMember extends Person {
         }
     }
 
-    // Return item
+    // Return Item
     public void returnItem(LibraryItem item, int daysLate) {
         if (borrowedItems.contains(item)) {
             item.checkIn();
             borrowedItems.remove(item);
 
-            double fee = calculateLateFee(item, daysLate);
+            double fee = calculatedLateFee(item, daysLate);
             outstandingFees += fee;
         }
     }
 
-    // Late fee logic (simple version)
-    private double calculateLateFee(LibraryItem item, int daysLate) {
-        double rate = 0.5; // example: $0.50 per day
+    // Late Fee Logic
+    private double calculatedLateFee(LibraryItem item, int daysLate) {
+        double rate = 0.5; 
         return daysLate > 0 ? daysLate * rate : 0;
     }
 
-    // Pay fees
-    public void payFees(double amount) {
+    // Pays Fees
+    public void paysFees(double amount) {
         if (amount > 0) {
             outstandingFees -= amount;
             if (outstandingFees < 0) {

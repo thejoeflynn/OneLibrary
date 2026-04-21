@@ -1,4 +1,4 @@
-package com.zipcodewilmington.centrallibrary;
+package com.zipcodewilmington.OneLibrary;
 
 public abstract class Person {
         private String name;
