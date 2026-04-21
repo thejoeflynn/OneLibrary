@@ -1,6 +1,6 @@
 package com.zipcodewilmington.OneLibrary;
-
-public abstract class LibraryItem implements Searchable {
+    
+public abstract class LibraryItem {
     private String id;
     private String title;
     private String location;
@@ -75,3 +75,5 @@ public abstract class LibraryItem implements Searchable {
     public abstract String getItemType();
 
 }
+
+
