@@ -11,7 +11,7 @@ public class Periodical extends LibraryItem {
 
     // gets these fields from class LibraryItem
     public Periodical(String id, String title, String location, String publisher, String issn, int volume, int issueNumber, String publicationDate) {
-        super(id, title, location);         
+        super(id, title, location);       
         this.publisher = publisher; 
         this.issn = issn; 
         this.volume = volume; 
