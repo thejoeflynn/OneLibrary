@@ -15,8 +15,8 @@ package com.zipcodewilmington.OneLibrary;
 // [ONELIBRARY] Please type in your member ID
 // > (USER): m101
 
-// [ONELIBRARY] Welcome (Name) What would you like to do?
-//   |BOOKS|  |DVDs|  |CHECKOUT HISTORY|  |PROFILE|  |HELP|  |LOGOUT|
+// [ONELIBRARY] Welcome (Name) What would you like to do? Type a number to select an option.
+//   |1. BOOKS|  |2. DVDs|  |3. CHECKOUT HISTORY|  |PROFILE|  |HELP|  |LOGOUT|
 
 // > BOOKS
 
