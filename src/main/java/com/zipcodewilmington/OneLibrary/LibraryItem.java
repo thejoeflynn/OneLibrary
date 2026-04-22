@@ -6,6 +6,15 @@ public abstract class LibraryItem {
     private String location;
     private boolean isAvailable;
 
+    // I need this for my periodical class but cant figure out how to get it to work correctly 
+
+    //public LibraryItem(String id, String title, String location) {
+        //setID(id); 
+        //setTitle(title); 
+        //setLocation(location); 
+        //this.isAvailable = true; 
+    //}
+
     public String getId() {
         return id;
     }
@@ -55,10 +64,11 @@ public abstract class LibraryItem {
     }
 
     public boolean matchesKeyword(String keyword) {
-        if (keyword == null || keyword.isEmpty())
+        if (keyword == null || keyword.isEmpty()) {
             return false;
-        String[] fields = getSearchableFields();
-        for (String field : fields) {
+        }
+        //String[] fields = getSearchableFields();
+        for (String field : getSearchableFields()) {
             if (field != null && field.toLowerCase().contains(keyword.toLowerCase())) {
                 return true;
             }
@@ -74,4 +84,6 @@ public abstract class LibraryItem {
 
     public abstract String getItemType();
 
-}
+    
+    }
+
