@@ -11,9 +11,10 @@ public class DVD extends LibraryItem implements Reservable {
     public DVD(String id, String title, String location,
             String director, int duration, String rating, String genre) {
 
-        setId(id);
-        setTitle(title);
-        setLocation(location);
+        super(id, title, location);
+        //setId(id);
+        //setTitle(title);
+        //setLocation(location);
         this.director = director;
         this.duration = duration;
         this.rating = rating;

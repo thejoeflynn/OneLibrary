@@ -63,6 +63,7 @@ public abstract class LibraryItem implements Searchable {
         isAvailable = false;
     }
 
+    @Override
     public boolean matchesKeyword(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return false;
@@ -76,6 +77,7 @@ public abstract class LibraryItem implements Searchable {
         return false;
     }
 
+    @Override
     public abstract String[] getSearchableFields();
 
     public abstract double calculateLateFee(int daysLate);
