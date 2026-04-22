@@ -9,9 +9,9 @@ public class Periodical extends LibraryItem {
     private int issueNumber; 
     private String publicationDate; 
 
-    // need this, put have it commented out in LibraryItem class until we can get it fixed correctly in LibraryItem class
+    // gets these fields from class LibraryItem
     public Periodical(String id, String title, String location, String publisher, String issn, int volume, int issueNumber, String publicationDate) {
-        super(id, title, location);           // gets these fields from LibraryItem class
+        super(id, title, location);       
         this.publisher = publisher; 
         this.issn = issn; 
         this.volume = volume; 
@@ -39,13 +39,13 @@ public class Periodical extends LibraryItem {
         return new String[] { getTitle(), publisher, issn}; 
     }
     
-    @Override 
-    public boolean matchesKeyword(String keyword) {
-        for (String field : getSearchableFields()) {                        // checks for the keywords ignoring case sensitivity 
-            if (field.toLowerCase().contains(keyword.toLowerCase())) {
-                return true;
-            }
-        }
-        return false; 
-    }
+   // @Override 
+    // public boolean matchesKeyword(String keyword) {
+        //for (String field : getSearchableFields()) {                        // checks for the keywords ignoring case sensitivity but 
+            //if (field.toLowerCase().contains(keyword.toLowerCase())) {      // LibraryItem class already does this (repetitive) 
+                //return true;
+            //}
+       // }
+        //return false; 
+    //}
 }

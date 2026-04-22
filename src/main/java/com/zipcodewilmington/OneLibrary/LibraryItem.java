@@ -8,12 +8,12 @@ public abstract class LibraryItem implements Searchable {
 
     // I need this for my periodical class but cant figure out how to get it to work correctly 
 
-    //public LibraryItem(String id, String title, String location) {
-        //setID(id); 
-        //setTitle(title); 
-        //setLocation(location); 
-        //this.isAvailable = true; 
-    //}
+    public LibraryItem(String id, String title, String location) {
+        this.id = id; 
+        this.title = title; 
+        this.location = location; 
+        this.isAvailable = true; 
+    }
 
     public String getId() {
         return id;
@@ -63,6 +63,7 @@ public abstract class LibraryItem implements Searchable {
         isAvailable = false;
     }
 
+    @Override
     public boolean matchesKeyword(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return false;
@@ -76,6 +77,7 @@ public abstract class LibraryItem implements Searchable {
         return false;
     }
 
+    @Override
     public abstract String[] getSearchableFields();
 
     public abstract double calculateLateFee(int daysLate);

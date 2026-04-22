@@ -1,73 +1,81 @@
 package com.zipcodewilmington.OneLibrary;
 
-/**
- * Created by n3pjk on 6/9/2025.
- */
+import java.util.Scanner;
 
-// psuedocode!
-// [ONELIBRARY] Welcome to the OneLibrary! Please login:
-// > (USER): m101
+public class MainApplication {
+    static Scanner scanner = new Scanner(System.in);
 
-// [ONELIBRARY] Welcome (Name) What would you like to do?
-//   |BOOKS|  |DVDs|  |CHECKOUT HISTORY|  |PROFILE|  |HELP|
+    public static void main(String[] args) {
+        welcomeScreen();
+    }
 
-// > BOOKS
+    static void welcomeScreen() {
+        System.out.println("[ONELIBRARY] Welcome to OneLibrary! Type a number to select an option.");
+        System.out.println("    |1. Login|");
+        System.out.println("    |2. New Account|");
+        System.out.print("> ");
+        String choice = scanner.nextLine();
 
-// [ONELIBRARY] Books! 
-//   |SEARCH|  |FULL LIST|  |YEAR|  |AUTHOR|
+        switch (choice) {
+            case "1":
+                loginScreen();
+                break;
+            case "2":
+                newAccountScreen();
+                break;
+            default:
+                System.out.println("[ONELIBRARY] Come on there's two choices just pick one.");
+                break;
+        }
 
-// > SEARCH
+    }
 
-// [ONELIBRARY] Please search
+    static void loginScreen(){
+        while(true){
+            System.out.println("[ONELIBRARY] Please type in your member ID.");
+            System.out.println("> ");
+            String memberID = scanner.nextLine();
+            System.out.println("[ONELIBRARY] Welcome User!");
+            homeScreen();
+        }
+    }
 
-// > HARRY POTTER
+    static void homeScreen(){
+        while(true){
+            System.out.println("[ONELIBRARY] What would you like to do? Type a number to select an option");
+            System.out.println("    |1. BOOKS|  |2. DVDs|   |3. CHECKOUT HISTORY|   |4. PROFILE|    |5. HELP|   |6. LOGOUT|");
+            System.out.print("> ");
+            String choice = scanner.nextLine();
 
-// [ONELIBRARY] Here's a list of books with "HARRY POTTER"
-//      BK0001 | Harry Potter and the Sorcerer's Stone, 1997-11-01, JK ROWLING
-//      BK0002 | Harry Potter and the Chamber of Secrets, 1998-10-31, JK ROWLING
-//      BK0003 | Harry Potter and the Prisoner of Azkaban, 1999-12-25, JK ROWLING
+            switch (choice) {
+                case "1" :
+                    System.out.println("[ONELIBRARY] Books coming soon. Clay tablets available now!");
+                    break;
+                case "2" :
+                    System.out.println("[ONELIBRARY] DVDs and nonsense coming soon.");
+                    break;
+                case "3" :
+                    System.out.println("[ONELIBRARY] You can't checkout anything yet!");
+                    break;
+                case "4":
+                    System.out.println("[ONELIBRARY] Profile coming soon.");
+                    break;
+                case "5" :
+                    System.out.println("[ONELIBRARY] No help for you!");
+                    break;
+                case "6" :
+                    welcomeScreen();
+                default:
+                    System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
+                break;
+            }
+        }
+        
+    }
 
-// > BK0003
+    static void newAccountScreen() {
+        System.out.println("[ONELIBRARY] Coming soon");
+        welcomeScreen();
+    }
 
-// [ONELIBRARY] Harry Potter and the Prisoner of Azkaban
-//      DATE | 1999-12-25
-//    AUTHOR | JK ROWLING
-//        ID | BK0003
-//   SUMMARY | "Harry Potter goes on another wacky adventure to do whatever idk wizard stuff."
-// AVAILABLE | RESERVED UNTIL [2026-04-28]
-//
-//
-//
-//   |FAVORITE|  |RESERVE|  |BACK|  |HOME|
-//
-//
-// > BACK
-
-
-// [ONELIBRARY] Welcome (Name) What would you like to do?
-//   |BOOKS|  |DVDs|  |CHECKOUT HISTORY|  |PROFILE|  |HELP|
-//
-// > CHECKOUT HISTORY
-//
-// [ONELIBRARY] Things you have previously checked-out
-//      DV6180 | The Dark Side of the Moon | RSVD: 2026-04-20 | RTRN: 2026-04-21
-//      BK2349 | The Great Gatsby | RSVD: 2026-04-09 | RTRN: 2026-04-17
-//      BK0047 | The Essential Calvin and Hobbes | RSVD: 2026-04-01 | RTRN: 2026-04-19
-//      DV5710 | To Pimp a Butterfly | RSVD: 2026-04-02 | RTRN: 2026-04-04
-//
-//
-//
-//   |RE-RESERVE|  |BACK|  |HOME|
-//
-// > BACK
-
-
-// [ONELIBRARY] Welcome to the OneLibrary! Please login:
-// > (USER): /newaccount
-//
-// [ONELIBRARY] Please fill out the information
-// > FIRST NAME: KRISTOFER
-// > LAST NAME: YOUNGER
-// > AGE: ??
-// > EMAIL: kris@zipcodewilmington.com
-// 
+}
