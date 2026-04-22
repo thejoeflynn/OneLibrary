@@ -9,10 +9,10 @@ public class Book extends LibraryItem {
     public Book(String id, String title, String location,
             String author, String isbn, int pages, String genre) {
 
-        setId(id);
-        setTitle(title);
-        setLocation(location);
-
+        super(id, title, location); 
+        //setId(id);
+        //setTitle(title);
+        //setLocation(location);
         setAuthor(author);
         setIsbn(isbn);
         setPages(pages);
