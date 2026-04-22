@@ -1,13 +1,15 @@
 package com.zipcodewilmington.centrallibrary;
 
-import java.util.List;
-
 public interface Searchable {
-    List<String> getSearchableFields();
+
+    String[] getSearchableFields();
 
     default boolean matchesKeyword(String keyword) {
+        if (keyword == null || keyword.isBlank())
+            return false;
+        String lower = keyword.toLowerCase();
         for (String field : getSearchableFields()) {
-            if (field.toLowerCase().contains(keyword.toLowerCase())) {
+            if (field != null && field.toLowerCase().contains(lower)) {
                 return true;
             }
         }
