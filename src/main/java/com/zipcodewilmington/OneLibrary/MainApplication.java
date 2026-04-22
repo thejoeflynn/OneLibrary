@@ -8,3 +8,6 @@ public class MainApplication {
     public static void main(String[] args) {
         welcomeScreen();
     }
+
+    static void welcomeScreen() {}
+}
