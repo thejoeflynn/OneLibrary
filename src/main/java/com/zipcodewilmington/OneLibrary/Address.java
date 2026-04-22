@@ -18,7 +18,11 @@ public class Address {
     }
 
     public void setStreet(String street) {
-        this.street = street;
+        if (street != null && !street.isEmpty()){
+            this.street = street;
+        } else {
+            System.out.println("Invalid street");
+        }
     }
 
     public String getCity() {
@@ -26,7 +30,11 @@ public class Address {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        if (city != null && !city.isEmpty()){
+            this.city = city;
+        } else {
+            System.out.println("Invalid city");
+        }
     }
 
     public String getState() {
@@ -34,7 +42,11 @@ public class Address {
     }
 
     public void setState(String state) {
-        this.state = state;
+        if (state != null && !state.isEmpty()) {
+            this.state = state;
+        } else {
+            System.out.println("Invalid state");
+        }
     }
 
     public String getZipCode() {
@@ -42,7 +54,11 @@ public class Address {
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        if (zipCode != null && !zipCode.isEmpty()) {
+            this.zipCode = zipCode;
+        } else {
+            System.out.println("invalid zipcode");
+        }
     }
 
     public String toString() {
