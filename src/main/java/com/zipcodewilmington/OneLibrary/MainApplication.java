@@ -60,3 +60,14 @@ package com.zipcodewilmington.OneLibrary;
 //   |RE-RESERVE|  |BACK|  |HOME|
 //
 // > BACK
+
+
+// [ONELIBRARY] Welcome to the OneLibrary! Please login:
+// > (USER): /newaccount
+//
+// [ONELIBRARY] Please fill out the information
+// > FIRST NAME: KRISTOFER
+// > LAST NAME: YOUNGER
+// > AGE: ??
+// > EMAIL: kris@zipcodewilmington.com
+// 
