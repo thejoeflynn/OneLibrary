@@ -58,6 +58,7 @@ public class Library {
             for(LibraryItem item : member.getBorrowedItems()) {
                 String type = item.getItemType();
                 int maxDays = item.getMaxBorrowDays();
+           
                 double lateFees = item.calculateLateFee(daysLate);
                 System.out.println(type + " | Max Days: " + maxDays + " | Fee: " + lateFees);
             }
