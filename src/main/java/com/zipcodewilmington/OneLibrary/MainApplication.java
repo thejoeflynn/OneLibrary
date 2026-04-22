@@ -1,13 +1,12 @@
 package com.zipcodewilmington.OneLibrary;
 
-import java.util.Scanner;
+/**
+ * Created by n3pjk on 6/9/2025.
+ */
 
-public class MainApplication {
-    static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        welcomeScreen();
-    }
 
-    static void welcomeScreen() {}
+
+
+
 }
