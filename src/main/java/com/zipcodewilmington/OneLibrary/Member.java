@@ -6,11 +6,12 @@ import java.util.List;
 public class Member extends Person {
     private String memberId;
     private String membershipDate;
-    private List <LibraryItem> borrowedItems;
+    private List<LibraryItem> borrowedItems;
     private double outstandingFees;
     private Address address;
 
-    public Member(String name, int age, String email,   String phoneNumber, String memberId, String membershipDate, Address address) {
+    public Member(String name, int age, String email, String phoneNumber, String memberId, String membershipDate,
+            Address address) {
         super(name, age, email, phoneNumber);
         this.memberId = memberId;
         this.membershipDate = membershipDate;
@@ -18,9 +19,14 @@ public class Member extends Person {
         this.borrowedItems = new ArrayList<>();
         this.outstandingFees = 0.0;
     }
-    
-    public String getMemberId() { return memberId; }
-    public double getOutstandingFees() { return outstandingFees; }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public double getOutstandingFees() {
+        return outstandingFees;
+    }
 
     public List<LibraryItem> getBorrowedItems() {
         return new ArrayList<>(borrowedItems); // protect internal list
