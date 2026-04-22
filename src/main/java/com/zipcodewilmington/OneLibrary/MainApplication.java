@@ -42,12 +42,21 @@ package com.zipcodewilmington.OneLibrary;
 //
 //
 // > BACK
-//
+
 
 // [ONELIBRARY] Welcome (Name) What would you like to do?
 //   |BOOKS|  |DVDs|  |CHECKOUT HISTORY|  |PROFILE|  |HELP|
 //
-//
-//
 // > CHECKOUT HISTORY
 //
+// [ONELIBRARY] Things you have previously checked-out
+//      DV6180 | The Dark Side of the Moon | RSVD: 2026-04-20 | RTRN: 2026-04-21
+//      BK2349 | The Great Gatsby | RSVD: 2026-04-09 | RTRN: 2026-04-17
+//      BK0047 | The Essential Calvin and Hobbes | RSVD: 2026-04-01 | RTRN: 2026-04-19
+//      DV5710 | To Pimp a Butterfly | RSVD: 2026-04-02 | RTRN: 2026-04-04
+//
+//
+//
+//   |RE-RESERVE|  |BACK|  |HOME|
+//
+// > BACK
