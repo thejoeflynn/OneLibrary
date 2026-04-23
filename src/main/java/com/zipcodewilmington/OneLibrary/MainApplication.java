@@ -24,9 +24,10 @@ public class MainApplication {
         while(true){
             System.out.println("[HOME] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     ________    _______     ____________     __________      _______     _________ ");
-            System.out.println("    |1. BOOKS|  |2. DVDs|   |3. CHECKOUTS|   |4. PROFILE|    |5. HELP|   |6. LOGOUT|");
-            System.out.println("    |________|  |_______|   |____________|   |__________|    |_______|   |_________| ");
+            System.out.println("     __________    _________     _____________________     ____________      _________     ____________ ");
+            System.out.println("    | 1. Books |  | 2. DVDs |   | 3. Checkout History |   | 4. Profile |    | 5. Help |   | 6. Log Out | ");
+            System.out.println("    |__________|  |_________|   |_____________________|   |____________|    |_________|   |____________| ");
+            System.out.println(" ");
             System.out.print("> ");
             String choice = scanner.nextLine();
 
@@ -35,7 +36,7 @@ public class MainApplication {
                     booksScreen();
                     break;
                 case "2" :
-                    System.out.println("[ONELIBRARY] DVDs and nonsense coming soon.");
+                    dvdsScreen();
                     break;
                 case "3" :
                     System.out.println("[ONELIBRARY] You can't checkout anything yet!");
@@ -67,9 +68,60 @@ public class MainApplication {
         while (true) { 
             System.out.println("[BOOKS] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     _________      ___________      __________________      ________________      _______ ");
-            System.out.println("    |1. Search|    |2. View All|    |3. Checkout a Book|    |4. Return a Book|    |5. Home|");
-            System.out.println("    |_________|    |___________|    |__________________|    |________________|    |_______|");
+            System.out.println("     ___________      _____________      ____________________      __________________      _________ ");
+            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout a Book |    | 4. Return a Book |    | 5. Home |");
+            System.out.println("    |___________|    |_____________|    |____________________|    |__________________|    |_________|");
+            System.out.println(" ");
+            System.out.println("> ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.println("[BOOKS] Search coming soon.");
+                    break;
+                case "2":
+                    System.out.println("[BOOKS] View All coming soon."); 
+                    break;
+                case "3":
+                    System.out.println("[BOOKS] Checkout coming soon.");
+                    break;   
+                case "4":
+                    System.out.println("[BOOKS] Return coming soon.");
+                    break;
+                case "5":
+                    homeScreen();
+            }
+
+        }
+    }
+
+    static void dvdsScreen() {
+        while (true) { 
+            System.out.println("[DVDs] Type a number to select an option");
+            System.out.println(" ");
+            System.out.println("     ___________      _____________      ___________________      _________________      _________ ");
+            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout a DVD |    | 4. Return a DVD |    | 5. Home | ");
+            System.out.println("    |___________|    |_____________|    |___________________|    |_________________|    |_________| ");
+            System.out.println(" ");
+            System.out.println("> ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.println("[DVDs] Search coming soon.");
+                    break;
+                case "2":
+                    System.out.println("[DVDs] View All coming soon."); 
+                    break;
+                case "3":
+                    System.out.println("[DVDs] Checkout coming soon.");   
+                    break;
+                case "4":
+                    System.out.println("[DVDs] Return coming soon.");
+                case "5":
+                    return;
+            }
+
         }
     }
 
