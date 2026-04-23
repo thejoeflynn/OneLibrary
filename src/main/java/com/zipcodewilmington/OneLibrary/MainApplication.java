@@ -4,52 +4,35 @@ import java.util.Scanner;
 
 public class MainApplication {
     static Scanner scanner = new Scanner(System.in);
+    static Library library = new Library();
 
     public static void main(String[] args) {
         welcomeScreen();
     }
 
-    static void welcomeScreen() {
-        System.out.println("[ONELIBRARY] Welcome to OneLibrary! Type a number to select an option.");
-        System.out.println("    |1. Login|");
-        System.out.println("    |2. New Account|");
-        System.out.print("> ");
-        String choice = scanner.nextLine();
-
-        switch (choice) {
-            case "1":
-                loginScreen();
-                break;
-            case "2":
-                newAccountScreen();
-                break;
-            default:
-                System.out.println("[ONELIBRARY] Come on there's two choices just pick one.");
-                break;
-        }
-
-    }
-
-    static void loginScreen(){
+    static void welcomeScreen(){
         while(true){
-            System.out.println("[ONELIBRARY] Please type in your member ID.");
+            System.out.println("[ONELIBRARY] Welcome to the OneLibrary!");
+            System.out.println("Press 'RETURN' to continue.");
             System.out.println("> ");
             String memberID = scanner.nextLine();
-            System.out.println("[ONELIBRARY] Welcome User!");
             homeScreen();
         }
     }
 
     static void homeScreen(){
         while(true){
-            System.out.println("[ONELIBRARY] What would you like to do? Type a number to select an option");
-            System.out.println("    |1. BOOKS|  |2. DVDs|   |3. CHECKOUT HISTORY|   |4. PROFILE|    |5. HELP|   |6. LOGOUT|");
+            System.out.println("[HOME] Type a number to select an option");
+            System.out.println(" ");
+            System.out.println("     ________    _______     ____________     __________      _______     _________ ");
+            System.out.println("    |1. BOOKS|  |2. DVDs|   |3. CHECKOUTS|   |4. PROFILE|    |5. HELP|   |6. LOGOUT|");
+            System.out.println("    |________|  |_______|   |____________|   |__________|    |_______|   |_________| ");
             System.out.print("> ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1" :
-                    System.out.println("[ONELIBRARY] Books coming soon. Clay tablets available now!");
+                    booksScreen();
                     break;
                 case "2" :
                     System.out.println("[ONELIBRARY] DVDs and nonsense coming soon.");
@@ -64,13 +47,30 @@ public class MainApplication {
                     System.out.println("[ONELIBRARY] No help for you!");
                     break;
                 case "6" :
-                    welcomeScreen();
+                    System.out.println("[ONELIBRARY] Are you sure you want to logout? Type 'Y' to confirm.");
+                    System.out.println("> ");
+                    String confirm = scanner.nextLine();
+                    if (confirm.equalsIgnoreCase("y")){
+                        System.out.println("[ONELIBRARY] Goodbye!");
+                        return;
+                    }
+                    break;
                 default:
                     System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
                 break;
             }
         }
         
+    }
+
+    static void booksScreen() {
+        while (true) { 
+            System.out.println("[BOOKS] Type a number to select an option");
+            System.out.println(" ");
+            System.out.println("     _________      ___________      __________________      ________________      _______ ");
+            System.out.println("    |1. Search|    |2. View All|    |3. Checkout a Book|    |4. Return a Book|    |5. Home|");
+            System.out.println("    |_________|    |___________|    |__________________|    |________________|    |_______|");
+        }
     }
 
     static void newAccountScreen() {

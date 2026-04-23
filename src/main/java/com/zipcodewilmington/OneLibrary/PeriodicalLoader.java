@@ -10,6 +10,10 @@ public class PeriodicalLoader {
 
     private Map<String, Periodical> titles = new HashMap<>();
 
+    // =========================
+    // LOAD TITLES (CSV 1)
+    // id,title,location,publisher
+    // =========================
     public void loadTitles(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
@@ -25,7 +29,6 @@ public class PeriodicalLoader {
 
                 String[] parts = line.split(",");
 
-                // SAFETY CHECK
                 if (parts.length < 4) {
                     System.out.println("Skipping invalid title row: " + line);
                     continue;
@@ -33,12 +36,13 @@ public class PeriodicalLoader {
 
                 String id = parts[0].trim();
                 String title = parts[1].trim();
+                String location = parts[2].trim();
                 String publisher = parts[3].trim();
 
                 Periodical periodical = new Periodical(
                         id,
                         title,
-                        "Shelf-P",
+                        location,
                         publisher
                 );
 
@@ -50,6 +54,10 @@ public class PeriodicalLoader {
         }
     }
 
+    // =========================
+    // LOAD ISSUES (CSV 2)
+    // id,title,location,volume,issue,date
+    // =========================
     public void loadIssues(String filePath, Library library) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
@@ -65,31 +73,29 @@ public class PeriodicalLoader {
 
                 String[] parts = line.split(",");
 
-                // SAFETY CHECK
-                if (parts.length < 7) {
+                if (parts.length < 6) {
                     System.out.println("Skipping invalid issue row: " + line);
                     continue;
                 }
 
-                // Column mapping (adjust if needed)
-                String titleId = parts[1].trim();   // title_id
-                String volumeStr = parts[4].trim();
-                String issueStr = parts[5].trim();
-                String date = parts[6].trim();
+                String id = parts[0].trim();
+                String volumeStr = parts[3].trim();
+                String issueStr = parts[4].trim();
+                String date = parts[5].trim();
 
                 try {
                     int volume = Integer.parseInt(volumeStr);
                     int issue = Integer.parseInt(issueStr);
 
-                    Periodical base = titles.get(titleId);
+                    Periodical base = titles.get(id);
 
                     if (base == null) {
-                        System.out.println("Missing title for id: " + titleId);
+                        System.out.println("Missing title for id: " + id);
                         continue;
                     }
 
-                    Periodical p = new Periodical(
-                            base.getId() + "-V" + volume + "I" + issue,
+                    Periodical periodical = new Periodical(
+                            id + "-V" + volume + "I" + issue,
                             base.getTitle(),
                             base.getLocation(),
                             volume,
@@ -97,7 +103,7 @@ public class PeriodicalLoader {
                             date
                     );
 
-                    library.addItem(p);
+                    library.addItem(periodical);
 
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid number in row: " + line);
