@@ -9,33 +9,11 @@ public class MainApplication {
         welcomeScreen();
     }
 
-    static void welcomeScreen() {
-        System.out.println("[ONELIBRARY] Welcome to OneLibrary! Type a number to select an option.");
-        System.out.println("    |1. Login|");
-        System.out.println("    |2. New Account|");
-        System.out.print("> ");
-        String choice = scanner.nextLine();
-
-        switch (choice) {
-            case "1":
-                loginScreen();
-                break;
-            case "2":
-                newAccountScreen();
-                break;
-            default:
-                System.out.println("[ONELIBRARY] Come on there's two choices just pick one.");
-                break;
-        }
-
-    }
-
-    static void loginScreen(){
+    static void welcomeScreen(){
         while(true){
-            System.out.println("[ONELIBRARY] Please type in your member ID.");
+            System.out.println("[ONELIBRARY] Welcome to the OneLibrary!");
             System.out.println("> ");
             String memberID = scanner.nextLine();
-            System.out.println("[ONELIBRARY] Welcome User!");
             homeScreen();
         }
     }
@@ -64,7 +42,7 @@ public class MainApplication {
                     System.out.println("[ONELIBRARY] No help for you!");
                     break;
                 case "6" :
-                    welcomeScreen();
+                    System.out.println("[ONELIBRARY] Thank you for using OneLibrary!");
                 default:
                     System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
                 break;
