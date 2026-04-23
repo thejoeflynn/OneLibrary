@@ -10,11 +10,8 @@ public class PeriodicalLoader {
 
     private Map<String, Periodical> titles = new HashMap<>();
 
-    // =========================
-    // LOAD TITLES (CSV 1)
-    // id,title,location,publisher
-    // =========================
     public void loadTitles(String filePath) {
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
@@ -39,11 +36,16 @@ public class PeriodicalLoader {
                 String location = parts[2].trim();
                 String publisher = parts[3].trim();
 
+                // Create base Periodical with placeholders
                 Periodical periodical = new Periodical(
                         id,
                         title,
                         location,
-                        publisher
+                        publisher,
+                        "",    
+                        0,      
+                        0,      
+                        ""     
                 );
 
                 titles.put(id, periodical);
@@ -54,11 +56,8 @@ public class PeriodicalLoader {
         }
     }
 
-    // =========================
-    // LOAD ISSUES (CSV 2)
-    // id,title,location,volume,issue,date
-    // =========================
     public void loadIssues(String filePath, Library library) {
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
@@ -94,10 +93,13 @@ public class PeriodicalLoader {
                         continue;
                     }
 
+                    // Create full Periodical (issue-level)
                     Periodical periodical = new Periodical(
                             id + "-V" + volume + "I" + issue,
                             base.getTitle(),
                             base.getLocation(),
+                            base.getPublisher(), 
+                            "",               
                             volume,
                             issue,
                             date
@@ -118,4 +120,27 @@ public class PeriodicalLoader {
     public Map<String, Periodical> getTitles() {
         return titles;
     }
+
+    // public static void main(String[] args) {
+
+    //     PeriodicalLoader loader = new PeriodicalLoader();
+    //     Library library = new Library();
+
+    //     loader.loadTitles("titles.csv");
+    //     loader.loadIssues("issues.csv", library);
+
+    //     System.out.println("=== PERIODICALS LOADED ===");
+
+    //     for (LibraryItem item : library.getItems()) {
+    //         Periodical p = (Periodical) item;
+
+    //         System.out.println(
+    //             p.getId() + " | " +
+    //             p.getTitle() + " | " +
+    //             p.getVolume() + " | " +
+    //             p.getIssueNumber() + " | " +
+    //             p.getPublicationDate()
+    //         );
+    //     }
+    // }
 }
