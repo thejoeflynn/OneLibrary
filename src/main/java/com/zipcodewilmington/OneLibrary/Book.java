@@ -9,14 +9,12 @@ public class Book extends LibraryItem {
     public Book(String id, String title, String location,
             String author, String isbn, int pages, String genre) {
 
-        setId(id);
-        setTitle(title);
-        setLocation(location);
+        super(id, title, location);
 
-        setAuthor(author);
-        setIsbn(isbn);
-        setPages(pages);
-        setGenre(genre);
+        this.author = author;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.genre = genre;
     }
 
     public String getAuthor() {
@@ -32,7 +30,7 @@ public class Book extends LibraryItem {
     }
 
     public void setIsbn(String isbn) {
-        if(isbn != null && !isbn.isEmpty()) {
+        if (isbn != null && !isbn.isEmpty()) {
             this.isbn = isbn;
         } else {
             System.out.println("Invalid ISBN");
@@ -44,7 +42,7 @@ public class Book extends LibraryItem {
     }
 
     public void setPages(int pages) {
-        if(pages > 0) {
+        if (pages > 0) {
             this.pages = pages;
         } else {
             System.out.println("Invalid Pages");
@@ -56,20 +54,20 @@ public class Book extends LibraryItem {
     }
 
     public void setGenre(String genre) {
-        if(genre != null && !genre.isEmpty()) {
+        if (genre != null && !genre.isEmpty()) {
             this.genre = genre;
         } else {
             System.out.println("Invalid Genre");
         }
     }
- 
+
     @Override
     public String[] getSearchableFields() {
         return new String[] {
-        getTitle(),
-        author,
-        genre,
-        isbn
+                getTitle(),
+                author,
+                genre,
+                isbn
         };
     }
 
