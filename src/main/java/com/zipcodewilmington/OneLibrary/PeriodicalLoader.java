@@ -15,16 +15,13 @@ public class PeriodicalLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
-            boolean isFirstLine = true;
+
+            // Skip header
+            br.readLine();
 
             while ((line = br.readLine()) != null) {
 
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
-
-                String[] parts = line.split(",");
+                String[] parts = line.split(",", -1);
 
                 if (parts.length < 4) {
                     System.out.println("Skipping invalid title row: " + line);
@@ -36,16 +33,15 @@ public class PeriodicalLoader {
                 String location = parts[2].trim();
                 String publisher = parts[3].trim();
 
-                // Create base Periodical with placeholders
                 Periodical periodical = new Periodical(
                         id,
                         title,
                         location,
                         publisher,
-                        "",    
-                        0,      
-                        0,      
-                        ""     
+                        "",   
+                        0,   
+                        0,   
+                        ""   
                 );
 
                 titles.put(id, periodical);
@@ -61,16 +57,13 @@ public class PeriodicalLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
-            boolean isFirstLine = true;
+
+            // Skip header
+            br.readLine();
 
             while ((line = br.readLine()) != null) {
 
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
-
-                String[] parts = line.split(",");
+                String[] parts = line.split(",", -1);
 
                 if (parts.length < 6) {
                     System.out.println("Skipping invalid issue row: " + line);
@@ -93,13 +86,13 @@ public class PeriodicalLoader {
                         continue;
                     }
 
-                    // Create full Periodical (issue-level)
+                    // Full issue object
                     Periodical periodical = new Periodical(
                             id + "-V" + volume + "I" + issue,
                             base.getTitle(),
                             base.getLocation(),
-                            base.getPublisher(), 
-                            "",               
+                            base.getPublisher(),
+                            "",  
                             volume,
                             issue,
                             date
@@ -121,26 +114,45 @@ public class PeriodicalLoader {
         return titles;
     }
 
-    // public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    //     PeriodicalLoader loader = new PeriodicalLoader();
-    //     Library library = new Library();
+    PeriodicalLoader loader = new PeriodicalLoader();
+    Library library = new Library();
 
-    //     loader.loadTitles("titles.csv");
-    //     loader.loadIssues("issues.csv", library);
+    loader.loadTitles("src/main/java/com/zipcodewilmington/OneLibrary/periodical-titles.csv");
+    loader.loadIssues("src/main/java/com/zipcodewilmington/OneLibrary/periodical-issues.csv", library);
 
-    //     System.out.println("=== PERIODICALS LOADED ===");
+    // =========================
+    // PRINT TITLES
+    // =========================
+    System.out.println("=== TITLES LOADED ===");
 
-    //     for (LibraryItem item : library.getItems()) {
-    //         Periodical p = (Periodical) item;
+    for (String key : loader.getTitles().keySet()) {
+        Periodical p = loader.getTitles().get(key);
 
-    //         System.out.println(
-    //             p.getId() + " | " +
-    //             p.getTitle() + " | " +
-    //             p.getVolume() + " | " +
-    //             p.getIssueNumber() + " | " +
-    //             p.getPublicationDate()
-    //         );
-    //     }
-    // }
+        System.out.println(
+            p.getId() + " | " +
+            p.getTitle() + " | " +
+            p.getPublisher()
+        );
+    }
+
+    // =========================
+    // PRINT ISSUES
+    // =========================
+    System.out.println("\n=== ISSUES LOADED ===");
+
+    for (LibraryItem item : library.getItems()) {
+        Periodical p = (Periodical) item;
+
+        System.out.println(
+            p.getId() + " | " +
+            p.getTitle() + " | " +
+            p.getVolume() + " | " +
+            p.getIssueNumber() + " | " +
+            p.getPublicationDate()
+        );
+    }
+}
+
 }
