@@ -75,7 +75,7 @@ public class PeriodicalLoader {
                 String titleId = parts[1].trim();   // title_id
                 String volumeStr = parts[4].trim();
                 String issueStr = parts[5].trim();
-                String date = parts[6].trim();
+                String date = parts[4].trim();
 
                 try {
                     int volume = Integer.parseInt(volumeStr);
