@@ -15,6 +15,10 @@ public class Library {
         librarians = new ArrayList<>();
     }
 
+    public List<LibraryItem> getItems() {
+        return items;
+    }
+
     public void addItem(LibraryItem item) {
         items.add(item);
     }
