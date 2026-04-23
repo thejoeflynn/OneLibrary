@@ -21,10 +21,6 @@ public class Book extends LibraryItem {
         setGenre(genre);
     }
 
-    public List<LibraryItem> getItems() {
-        return items;
-    }
-
     public String getAuthor() {
         return author;
     }
