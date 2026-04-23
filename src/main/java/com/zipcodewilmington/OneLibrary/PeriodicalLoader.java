@@ -137,22 +137,22 @@ public class PeriodicalLoader {
         );
     }
 
-    // =========================
-    // PRINT ISSUES
-    // =========================
-    System.out.println("\n=== ISSUES LOADED ===");
+    // // =========================
+    // // PRINT ISSUES
+    // // =========================
+    // System.out.println("\n=== ISSUES LOADED ===");
 
-    for (LibraryItem item : library.getItems()) {
-        Periodical p = (Periodical) item;
+    // for (LibraryItem item : library.getItems()) {
+    //     Periodical p = (Periodical) item;
 
-        System.out.println(
-            p.getId() + " | " +
-            p.getTitle() + " | " +
-            p.getVolume() + " | " +
-            p.getIssueNumber() + " | " +
-            p.getPublicationDate()
-        );
-    }
-}
+    //     System.out.println(
+    //         p.getId() + " | " +
+    //         p.getTitle() + " | " +
+    //         p.getVolume() + " | " +
+    //         p.getIssueNumber() + " | " +
+    //         p.getPublicationDate()
+    //     );
+    //     }
+    // }
 
 }
