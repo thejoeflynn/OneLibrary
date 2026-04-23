@@ -52,7 +52,6 @@ public class MainApplication {
                     System.out.println("Press 'RETURN' to continue.");
                     System.out.println("> ");
                     String memberID = scanner.nextLine();
-                    homeScreen();
                     break;
                 case "6" :
                     System.out.println("[ONELIBRARY] Are you sure you want to logout? Type 'Y' to confirm.");
@@ -99,7 +98,7 @@ public class MainApplication {
                     System.out.println("[BOOKS] Come on you got this.");
                     break;
                 case "5":
-                    homeScreen();
+                    return;
                 default:
                     System.out.println("[ONELIBRARY] Unknown command.");
             }
@@ -130,6 +129,7 @@ public class MainApplication {
                     break;
                 case "4":
                     System.out.println("[DVDs] FIGURE IT OUT!");
+                    break;
                 case "5":
                     return;
                 default:
@@ -162,6 +162,7 @@ public class MainApplication {
                     break;
                 case "4":
                     System.out.println("[PERIODICALS] Return coming soon.");
+                    break;
                 case "5":
                     return;
                 default:
@@ -194,6 +195,7 @@ public class MainApplication {
                     break;
                 case "4":
                     System.out.println("[MEMBERS] idk just read the prompt.");
+                    break;
                 case "5":
                     return;
                 default:
@@ -201,11 +203,6 @@ public class MainApplication {
             }
 
         }
-    }
-
-    static void newAccountScreen() {
-        System.out.println("[ONELIBRARY] Coming soon");
-        welcomeScreen();
     }
 
 }
