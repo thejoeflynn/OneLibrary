@@ -1,41 +1,21 @@
-Text#,Type,Issued,Title,Language,Authors,Subjects,LoCC,Bookshelves
-1,Text,1971-12-01,The Declaration of Independence of the United States of America,en,"Jefferson, Thomas, 1743-1826","United States -- History -- Revolution, 1775-1783 -- Sources; United States. Declaration of Independence",E201; JK,Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: History - Warfare; Browsing: Politics
-2,Text,1972-12-01,The United States Bill of Rights The Ten Original Amendments to the Constitution of the United States,en,United States,Civil rights -- United States -- Sources; United States. Constitution. 1st-10th Amendments,JK; KF,Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: Law & Criminology; Browsing: Politics
-3,Text,1973-11-01,John F. Kennedy's Inaugural Address,en,"Kennedy, John F. (John Fitzgerald), 1917-1963",United States -- Foreign relations -- 1961-1963; Presidents -- United States -- Inaugural addresses,E838,Browsing: History - American; Browsing: Politics
-4,Text,1973-11-01,"Lincoln's Gettysburg Address Given November 19, 1863 on the battlefield near Gettysburg, Pennsylvania, USA",en,"Lincoln, Abraham, 1809-1865","Consecration of cemeteries -- Pennsylvania -- Gettysburg; Soldiers' National Cemetery (Gettysburg, Pa.); Lincoln, Abraham, 1809-1865. Gettysburg address",E456,US Civil War; Browsing: History - American; Browsing: Politics
-5,Text,1975-12-01,The United States Constitution,en,United States,United States -- Politics and government -- 1783-1789 -- Sources; United States. Constitution,JK; KF,United States; Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: Law & Criminology; Browsing: Politics
-6,Text,1976-12-01,Give Me Liberty or Give Me Death,en,"Henry, Patrick, 1736-1799","Speeches, addresses, etc., American; United States -- Politics and government -- 1775-1783 -- Sources; Virginia -- Politics and government -- 1775-1783 -- Sources",E201,American Revolutionary War; Browsing: History - American; Browsing: History - Warfare; Browsing: Politics
-7,Text,1977-12-01,The Mayflower Compact,en,,"Massachusetts -- History -- New Plymouth, 1620-1691 -- Sources; Pilgrims (New Plymouth Colony); Mayflower Compact (1620)",F001,Browsing: History - American
-8,Text,1978-12-01,Abraham Lincoln's Second Inaugural Address,en,"Lincoln, Abraham, 1809-1865",United States -- Politics and government -- 1861-1865; Presidents -- United States -- Inaugural addresses,E456,US Civil War; Browsing: History - American; Browsing: Politics
-9,Text,1979-12-01,Abraham Lincoln's First Inaugural Address,en,"Lincoln, Abraham, 1809-1865",United States -- Politics and government -- 1861-1865; Presidents -- United States -- Inaugural addresses,E456,US Civil War; Browsing: History - American; Browsing: Politics
-10,Text,1989-08-01,The King James Version of the Bible,en,,Bible,BS,Banned Books List from the American Library Association; Browsing: History - Religious; Browsing: Religion/Spirituality/Paranormal
-11,Text,2008-06-27,Alice's Adventures in Wonderland,en,"Carroll, Lewis, 1832-1898",Fantasy fiction; Children's stories; Imaginary places -- Juvenile fiction; Alice (Fictitious character from Carroll) -- Juvenile fiction,PR; PZ,Children's Literature; Browsing: Children & Young Adult Reading; Browsing: Fiction
-12,Text,2008-06-25,Through the Looking-Glass,en,"Carroll, Lewis, 1832-1898",Fantasy fiction; Children's stories; Imaginary places -- Juvenile fiction; Alice (Fictitious character from Carroll) -- Juvenile fiction,PR; PZ,Children's Literature; Best Books Ever Listings; Browsing: Children & Young Adult Reading; Browsing: Literature; Browsing: Fiction
-13,Text,2008-06-25,The Hunting of the Snark: An Agony in Eight Fits,en,"Carroll, Lewis, 1832-1898","Nonsense verses, English",PR,Children's Literature; Browsing: Children & Young Adult Reading; Browsing: Literature
-14,Text,1991-04-01,The 1990 CIA World Factbook,en,United States. Central Intelligence Agency,"World politics -- Handbooks, manuals, etc.; Geography -- Handbooks, manuals, etc.; Political science -- Handbooks, manuals, etc.; Political statistics -- Handbooks, manuals, etc.",G,CIA World Factbooks; Browsing: Encyclopedias/Dictionaries/Reference; Browsing: Politics; Browsing: Travel & Geography
-15,Text,1991-05-01,"Moby-Dick; or, The Whale",en,"Melville, Herman, 1819-1891","Whaling -- Fiction; Sea stories; Psychological fiction; Ship captains -- Fiction; Adventure stories; Mentally ill -- Fiction; Ahab, Captain (Fictitious character) -- Fiction; Whales -- Fiction; Whaling ships -- Fiction",PS,Adventure; Best Books Ever Listings; Browsing: Literature; Browsing: Fiction
-16,Text,2008-06-25,Peter Pan,en,"Barrie, J. M. (James Matthew), 1860-1937",Fantasy literature; Peter Pan (Fictitious character) -- Fiction; Never-Never Land (Imaginary place) -- Fiction; Pirates -- Fiction; Fairies -- Fiction,PR; PZ,Children's Literature; Movie Books; Browsing: Children & Young Adult Reading; Browsing: Literature; Browsing: Science-Fiction & Fantasy; Browsing: Fiction
-17,Text,2008-06-25,The Book of Mormon,en,"Smith, Joseph, Jr., 1805-1844; Church of Jesus Christ of Latter-day Saints",Church of Jesus Christ of Latter-day Saints -- Sacred books; Latter Day Saint churches -- Sacred books,BX,Christianity; Latter Day Saints; Browsing: Philosophy & Ethics; Browsing: Religion/Spirituality/Paranormal
-18,Text,1991-08-01,The Federalist Papers,en,"Hamilton, Alexander, 1757-1804; Jay, John, 1745-1829; Madison, James, 1751-1836",Constitutional history -- United States -- Sources; Constitutional law -- United States,JK; KF,Politics; Browsing: History - American; Browsing: Politics
-19,Text,2004-06-01,The Song of Hiawatha,en,"Longfellow, Henry Wadsworth, 1807-1882; Morris, Woodrow W. [Editor]","Indians of North America -- Poetry; Hiawatha, active 15th century -- Poetry; Iroquois Indians -- Kings and rulers -- Poetry",PS,Children's Literature; Poetry; Native America; Browsing: Children & Young Adult Reading; Browsing: Culture/Civilization/Society; Browsing: Literature; Browsing: Poetry
-20,Text,1991-10-01,Paradise Lost,en,"Milton, John, 1608-1674",Fall of man -- Poetry; Adam (Biblical figure) -- Poetry; Eve (Biblical figure) -- Poetry; Bible. Genesis -- History of Biblical events -- Poetry,PR,Poetry; Banned Books from Anne Haight's list; Browsing: Literature; Browsing: Poetry
-76295,Text,2025-06-14,Notes from Calais base,en,"Montague, C. E. (Charles Edward), 1867-1928",,,
-76296,Text,2025-06-14,"Ralph Waldo Emerson, philosopher and seer",en,"Alcott, Amos Bronson, 1799-1888",,,
-76297,Text,2025-06-14,The constitutional iniquity involved in all forms of the regulation of prostitution,en,"Butler, Josephine Elizabeth Grey, 1828-1906",,,
-76298,Text,2025-06-14,The history of the psychoanalytic movement,en,"Freud, Sigmund, 1856-1939; Brill, A. A. (Abraham Arden), 1874-1948 [Translator]",,,
-76299,Text,2025-06-14,A dictionary of men's wear,en,"Baker, William Henry",,,
-76300,Text,2025-06-14,Lion yarn book,en,"Company, Lion Yarn",,,
-76301,Text,2025-06-15,The constitution violated,en,"Butler, Josephine Elizabeth Grey, 1828-1906",,,
-76302,Text,2025-06-15,"French morality, under the regulation system",en,"Daubié, Julie; Butler, Josephine Elizabeth Grey, 1828-1906 [Contributor]",,,
-76303,Text,2025-06-15,Sämtliche Werke 18: Aus einem Totenhause,de,"Dostoyevsky, Fyodor, 1821-1881; Filosofov, Dmitriĭ Vladimirovich, 1872-1940 [Contributor]; Merezhkovsky, Dmitry Sergeyevich, 1865-1941 [Contributor]; Moeller van den Bruck, Arthur, 1876-1925 [Editor]; Rahsin, E. K., 1886-1966 [Translator]",,,
-76304,Text,2025-06-15,Secrets of scene painting and stage effects,en,"Browne, Van Dyke",,,
-76305,Text,2025-06-15,The Catholic Church and conversion,en,"Chesterton, G. K. (Gilbert Keith), 1874-1936",,,
-76306,Text,2025-06-15,Kleuterboekje,nl,"Sutorius, Anna; Midderigh-Bokhorst, B. (Berhardina), 1880-1972 [Illustrator]",,,
-76307,Text,2025-06-15,L'heure décisive,fr,"Ardel, Henri, 1863-1938",,,
-76308,Text,2025-06-15,Fetzen,de,"Weicker, Alexander",,,
-76309,Text,2025-06-15,Fenn Kaß,de,"Weber, Batty",,,
-76310,Text,2025-06-15,Cindrulino,eo,"Milho, L.",,,
-76311,Text,2025-06-15,The book of the cat,en,"Simpson, Frances",,,
-76312,Text,2025-06-15,Viimeinen tsaaritar,fi,"Poljakov, V.",,,
-76313,Text,2025-06-15,Voimatonta väkeä,fi,"Malmberg, Aino, 1865-1933",,,
-76314,Text,2025-06-15,Genius rewarded,en,"Scott, John A.",,,
+id,title,location,author,isbn,pages,genre
+1,The Declaration of Independence,en,Thomas Jefferson,E201,100,Politics
+2,The United States Bill of Rights,en,United States,JK120,120,Law
+3,John F Kennedy Inaugural Address,en,John F Kennedy,E838,90,Politics
+4,Lincolns Gettysburg Address,en,Abraham Lincoln,E456,80,History
+5,The United States Constitution,en,United States,JK150,150,Politics
+6,Give Me Liberty or Give Me Death,en,Patrick Henry,E201,110,History
+7,The Mayflower Compact,en,Unknown,F001,70,History
+8,Lincolns Second Inaugural Address,en,Abraham Lincoln,E456,95,History
+9,Lincolns First Inaugural Address,en,Abraham Lincoln,E456,95,History
+10,King James Bible,en,Unknown,BS500,500,Religion
+11,Alices Adventures in Wonderland,en,Lewis Carroll,PR200,200,Fiction
+12,Through the Looking Glass,en,Lewis Carroll,PR180,180,Fiction
+13,The Hunting of the Snark,en,Lewis Carroll,PR140,140,Fiction
+14,The CIA World Factbook,en,CIA,G300,300,Reference
+15,Moby Dick,en,Herman Melville,PS400,400,Fiction
+16,Peter Pan,en,JM Barrie,PR220,220,Fiction
+17,The Book of Mormon,en,Joseph Smith,BX350,350,Religion
+18,The Federalist Papers,en,Hamilton Madison Jay,JK420,420,Politics
+19,The Song of Hiawatha,en,Henry Longfellow,PS210,210,Poetry
+20,Paradise Lost,en,John Milton,PR300,300,Poetry

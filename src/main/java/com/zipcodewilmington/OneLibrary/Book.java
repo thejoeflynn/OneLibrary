@@ -1,5 +1,7 @@
 package com.zipcodewilmington.OneLibrary;
 
+import java.util.List;
+
 public class Book extends LibraryItem {
     private String author;
     private String isbn;
@@ -17,6 +19,10 @@ public class Book extends LibraryItem {
         setIsbn(isbn);
         setPages(pages);
         setGenre(genre);
+    }
+
+    public List<LibraryItem> getItems() {
+        return items;
     }
 
     public String getAuthor() {
