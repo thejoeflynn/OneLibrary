@@ -19,8 +19,12 @@ public class PeriodicalLoader {
             // Skip header
             br.readLine();
 
+            // Skip header
+            br.readLine();
+
             while ((line = br.readLine()) != null) {
 
+                String[] parts = line.split(",", -1);
                 String[] parts = line.split(",", -1);
 
                 if (parts.length < 4) {
@@ -38,6 +42,10 @@ public class PeriodicalLoader {
                         title,
                         location,
                         publisher,
+                        "",   
+                        0,   
+                        0,   
+                        ""   
                         "",   
                         0,   
                         0,   
@@ -61,8 +69,12 @@ public class PeriodicalLoader {
             // Skip header
             br.readLine();
 
+            // Skip header
+            br.readLine();
+
             while ((line = br.readLine()) != null) {
 
+                String[] parts = line.split(",", -1);
                 String[] parts = line.split(",", -1);
 
                 if (parts.length < 6) {
@@ -87,10 +99,13 @@ public class PeriodicalLoader {
                     }
 
                     // Full issue object
+                    // Full issue object
                     Periodical periodical = new Periodical(
                             id + "-V" + volume + "I" + issue,
                             base.getTitle(),
                             base.getLocation(),
+                            base.getPublisher(),
+                            "",  
                             base.getPublisher(),
                             "",  
                             volume,
@@ -115,10 +130,15 @@ public class PeriodicalLoader {
     }
 
     public static void main(String[] args) {
+    public static void main(String[] args) {
 
     PeriodicalLoader loader = new PeriodicalLoader();
     Library library = new Library();
+    PeriodicalLoader loader = new PeriodicalLoader();
+    Library library = new Library();
 
+    loader.loadTitles("src/main/java/com/zipcodewilmington/OneLibrary/periodical-titles.csv");
+    loader.loadIssues("src/main/java/com/zipcodewilmington/OneLibrary/periodical-issues.csv", library);
     loader.loadTitles("src/main/java/com/zipcodewilmington/OneLibrary/periodical-titles.csv");
     loader.loadIssues("src/main/java/com/zipcodewilmington/OneLibrary/periodical-issues.csv", library);
 
@@ -136,24 +156,23 @@ public class PeriodicalLoader {
             p.getPublisher()
         );
     }
+
+    // =========================
+    // PRINT ISSUES
+    // =========================
+    System.out.println("\n=== ISSUES LOADED ===");
+
+    for (LibraryItem item : library.getItems()) {
+        Periodical p = (Periodical) item;
+
+        System.out.println(
+            p.getId() + " | " +
+            p.getTitle() + " | " +
+            p.getVolume() + " | " +
+            p.getIssueNumber() + " | " +
+            p.getPublicationDate()
+        );
+    }
 }
-
-    // // =========================
-    // // PRINT ISSUES
-    // // =========================
-    // System.out.println("\n=== ISSUES LOADED ===");
-
-    // for (LibraryItem item : library.getItems()) {
-    //     Periodical p = (Periodical) item;
-
-    //     System.out.println(
-    //         p.getId() + " | " +
-    //         p.getTitle() + " | " +
-    //         p.getVolume() + " | " +
-    //         p.getIssueNumber() + " | " +
-    //         p.getPublicationDate()
-    //     );
-    //     }
-    // }
 
 }
