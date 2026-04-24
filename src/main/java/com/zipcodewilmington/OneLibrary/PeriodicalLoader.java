@@ -154,6 +154,7 @@ public class PeriodicalLoader {
             p.getPublisher()
         );
     }
+}
 
     // // =========================
     // // PRINT ISSUES
