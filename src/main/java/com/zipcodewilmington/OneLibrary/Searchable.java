@@ -1,7 +1,17 @@
 package com.zipcodewilmington.OneLibrary;
 
 public interface Searchable {
-    boolean matchesKeyword(String keyword);
 
     String[] getSearchableFields();
+
+    default boolean matchesKeyword(String keyword) {
+        if (keyword == null)
+            return false;
+        String lower = keyword.toLowerCase();
+        for (String field : getSearchableFields()) {
+            if (field != null && field.toLowerCase().contains(lower))
+                return true;
+        }
+        return false;
+    }
 }
