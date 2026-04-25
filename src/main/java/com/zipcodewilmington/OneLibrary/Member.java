@@ -54,4 +54,13 @@ public class Member extends Person {
             }
         }
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getMembershipDate() {
+        return membershipDate;
+    }
+
 }

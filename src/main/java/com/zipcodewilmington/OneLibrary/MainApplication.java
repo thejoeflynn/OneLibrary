@@ -1,12 +1,17 @@
 package com.zipcodewilmington.OneLibrary;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainApplication {
     static Scanner scanner = new Scanner(System.in);
     static Library library = new Library();
+    static List<Member> members = new ArrayList<>();
 
     public static void main(String[] args) {
+        loadMembers();
         welcomeScreen();
     }
 
@@ -15,7 +20,7 @@ public class MainApplication {
             System.out.println("[ONELIBRARY] Welcome to the OneLibrary!");
             System.out.println("Press 'RETURN' to continue.");
             System.out.println("> ");
-            String memberID = scanner.nextLine();
+            String input = scanner.nextLine();
             homeScreen();
         }
     }
@@ -59,11 +64,14 @@ public class MainApplication {
                     String confirm = scanner.nextLine();
                     if (confirm.equalsIgnoreCase("y")){
                         System.out.println("[ONELIBRARY] Goodbye!");
-                        return;
+                        System.exit(0);
                     }
                     break;
                 case "67":
-                    System.out.println("Grow up.");
+                    System.out.println("[ONELIBRARY] Grow up.");
+                    System.out.println("Press 'RETURN' to grow up and continue.");
+                    System.out.println("> ");
+                    String input = scanner.nextLine();
                     break;
                 default:
                     System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
@@ -185,13 +193,41 @@ public class MainApplication {
 
             switch (choice) {
                 case "1":
-                    System.out.println("[MEMBERS] Search coming soon.");
+                    System.out.print("[MEMBERS] Enter member ID: ");
+                    String searchId = scanner.nextLine();
+                    boolean found = false;
+                    for (Member m : members) {
+                        if (m.getMemberId().equalsIgnoreCase(searchId)) {
+                        System.out.println("    ID: " + m.getMemberId());
+                        System.out.println("    Name: " + m.getName());
+                        System.out.println("    Email: " + m.getEmail());
+                        System.out.println("    Phone: " + m.getPhoneNumber());
+                        System.out.println("    Address: " + m.getAddress());
+                        System.out.println("    Membership Date: " + m.getMembershipDate());
+                        System.out.println("    Outstanding Fees: $" + m.getOutstandingFees());
+                        found = true;
+                        break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("[MEMBERS] Member not found.");
+                    }
                     break;
                 case "2":
-                    System.out.println("[MEMBERS] View All coming soon."); 
+                    if (members.isEmpty()) {
+                        System.out.println("[MEMBERS] No members found.");
+                    } else {
+                        System.out.println("[MEMBERS] All Members:");
+                    for (Member m : members) {
+                        System.out.println("    " + m.getMemberId() + " | " + m.getName() + " | " + m.getEmail());
+                        }
+                    }
+                    System.out.println("Press 'RETURN' to continue.");
+                    System.out.println("> ");
+                    String memberID = scanner.nextLine();
                     break;
                 case "3":
-                    System.out.println("[MEMBERS] There will be members to add soon. Hopefully...");   
+                    addNewMemberScreen();  
                     break;
                 case "4":
                     System.out.println("[MEMBERS] idk just read the prompt.");
@@ -202,6 +238,96 @@ public class MainApplication {
                     System.out.println("[MEMBERS] Unknown command.");
             }
 
+        }
+    }
+
+    static void addNewMemberScreen() {
+        System.out.println("[MEMBERS] New Member Registration");
+
+        System.out.print("Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Age: ");
+        int age = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Phone Number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Member ID: ");
+        String memberID = scanner.nextLine();
+
+        System.out.print("Street: ");
+        String street = scanner.nextLine();
+
+        System.out.print("City: ");
+        String city = scanner.nextLine();
+
+        System.out.print("State: ");
+        String state = scanner.nextLine();
+
+        System.out.print("Zip Code: ");
+        String zip = scanner.nextLine();
+
+        Address address = new Address(street, city, state, zip);
+        String membershipDate = LocalDate.now().toString();
+        Member member = new Member(name, age, email, phone, memberID, membershipDate, address);
+        members.add(member);
+        saveMember(member);
+        System.out.println("[MEMBERS] Member " + name + " added successfully! ID: " + memberID);
+    }
+
+    static void saveMember(Member member) {
+        try {
+            java.io.FileWriter fw = new java.io.FileWriter("members.csv", true);
+            fw.write(member.getMemberId() + "," +
+                     member.getName() + "," +
+                     member.getAge() + "," +
+                     member.getEmail() + "," +
+                     member.getPhoneNumber() + "," +
+                     member.getMembershipDate() + "," +
+                     member.getAddress().getStreet() + "," +
+                     member.getAddress().getCity() + "," +
+                     member.getAddress().getState() + "," +
+                     member.getAddress().getZipCode() + "\n");
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("[ONELIBRARY] Error saving member.");
+        }
+    }
+
+    static void loadMembers() {
+        try {
+            java.io.File file = new java.io.File("members.csv");
+            if (!file.exists()) return;
+            java.util.Scanner fileScanner = new java.util.Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] parts = line.split(",");
+                String memberId = parts[0].trim();
+                String name = parts[1].trim();
+                int age = Integer.parseInt(parts[2].trim());
+                String email = parts[3].trim();
+                String phone = parts[4].trim();
+                String membershipDate = parts[5].trim();
+                Address address = new Address(parts[6].trim(), parts[7].trim(), parts[8].trim(), parts[9].trim());
+            members.add(new Member(name, age, email, phone, memberId, membershipDate, address));
+        }
+        fileScanner.close();
+        } catch (Exception e) {
+            System.out.println("[ONELIBRARY] Error loading members.");
+        }
+    }
+
+    static void loadBooks() {
+        try {
+            java.io.File file = new java.io.File("//FILENAME");
+            if (!file.exists()) return;
+            
+        } catch (Exception e) {
+            System.out.println("[ONELIBRARY Error loading Books.");
         }
     }
 
