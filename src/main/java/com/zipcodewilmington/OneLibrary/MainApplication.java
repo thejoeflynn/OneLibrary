@@ -85,9 +85,9 @@ public class MainApplication {
         while (true) { 
             System.out.println("[BOOKS] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     ___________      _____________      _____________      ___________      _________ ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Help   |    | 5. Home |");
-            System.out.println("    |___________|    |_____________|    |_____________|    |___________|    |_________|");
+            System.out.println("     ___________      _____________      _____________      _____________      _________ ");
+            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return   |    | 5. Home |");
+            System.out.println("    |___________|    |_____________|    |_____________|    |_____________|    |_________|");
             System.out.println(" ");
             System.out.println("> ");
             String choice = scanner.nextLine();
@@ -100,10 +100,10 @@ public class MainApplication {
                     System.out.println("[BOOKS] View All coming soon."); 
                     break;
                 case "3":
-                    System.out.println("[BOOKS] Checkout coming soon.");
-                    break;   
+                    checkoutFlow("Book");
+                    break; 
                 case "4":
-                    System.out.println("[BOOKS] Come on you got this.");
+                    returnFlow("Book");
                     break;
                 case "5":
                     return;
@@ -118,9 +118,9 @@ public class MainApplication {
         while (true) { 
             System.out.println("[DVDs] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     ___________      _____________      _____________      __________      _________ ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Help  |    | 5. Home | ");
-            System.out.println("    |___________|    |_____________|    |_____________|    |__________|    |_________| ");
+            System.out.println("     ___________      _____________      _____________      ____________    _________ ");
+            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
+            System.out.println("    |___________|    |_____________|    |_____________|    |____________|    |_________| ");
             System.out.println(" ");
             System.out.println("> ");
             String choice = scanner.nextLine();
@@ -133,10 +133,10 @@ public class MainApplication {
                     System.out.println("[DVDs] View All coming soon."); 
                     break;
                 case "3":
-                    System.out.println("[DVDs] Checkout coming soon.");   
+                    checkoutFlow("DVD");
                     break;
                 case "4":
-                    System.out.println("[DVDs] FIGURE IT OUT!");
+                    returnFlow("DVD");
                     break;
                 case "5":
                     return;
@@ -166,10 +166,10 @@ public class MainApplication {
                     System.out.println("[PERIODICALS] View All coming soon."); 
                     break;
                 case "3":
-                    System.out.println("[PERIODICALS] Checkout coming soon.");   
+                    checkoutFlow("Periodical");
                     break;
                 case "4":
-                    System.out.println("[PERIODICALS] Return coming soon.");
+                    returnFlow("Periodical");
                     break;
                 case "5":
                     return;
@@ -327,7 +327,146 @@ public class MainApplication {
             if (!file.exists()) return;
             
         } catch (Exception e) {
-            System.out.println("[ONELIBRARY Error loading Books.");
+            System.out.println("[ONELIBRARY] Error loading Books.");
+        }
+        
+    }
+
+    // Finds a member by ID. Returns null if not found.
+    static Member findMemberById(String id) {
+        for (Member m : members) {
+            if (m.getMemberId().equalsIgnoreCase(id)) {
+            return m;
+            }
+        }
+        return null;
+    }
+
+    // Generic checkout flow. Pass "Book", "DVD", or "Periodical" to scope it.
+    // Assumes each subclass's getItemType() returns that exact string -- confirm
+    // when you look at Book.java / DVD.java / Periodical.java.
+    static void checkoutFlow(String itemType) {
+        String tag = "[" + itemType.toUpperCase() + "]";
+
+        System.out.print(tag + " Enter member ID: ");
+        String memberId = scanner.nextLine();
+        Member member = findMemberById(memberId);
+        if (member == null) {
+            System.out.println(tag + " Member not found.");
+            return;
+        }
+
+        System.out.print("Enter search keyword (or press RETURN for all " + itemType + "s): ");
+        String keyword = scanner.nextLine();
+
+        List<LibraryItem> candidates = new ArrayList<>();
+            for (LibraryItem item : library.getItems()) {
+            if (!item.getItemType().equalsIgnoreCase(itemType)) continue;
+            if (keyword.isEmpty() || item.matchesKeyword(keyword)) {
+            candidates.add(item);
+            }
+        }
+
+        if (candidates.isEmpty()) {
+            System.out.println(tag + " No matching " + itemType.toLowerCase() + "s found.");
+            return;
+        }
+
+        System.out.println("Results:");
+        for (int i = 0; i < candidates.size(); i++) {
+            LibraryItem item = candidates.get(i);
+            String status = item.isAvailable() ? "Available" : "Unavailable";
+            System.out.println("    " + (i + 1) + ". " + item.getTitle() + " [" + item.getId() + "] - " + status);
+        }
+
+        System.out.print("Select a number (or 0 to cancel): ");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println(tag + " Invalid number.");
+            return;
+        }
+        if (choice == 0) return;
+        if (choice < 1 || choice > candidates.size()) {
+            System.out.println(tag + " Number out of range.");
+            return;
+        }
+
+        LibraryItem selected = candidates.get(choice - 1);
+        if (!selected.isAvailable()) {
+            System.out.println(tag + " That item is already checked out.");
+            return;
+        }
+
+        member.borrowItem(selected);
+        System.out.println(tag + " " + selected.getTitle() + " checked out to " + member.getName() + ".");
+    }
+
+    // Generic return flow. Prompts for daysLate since Library doesn't track due dates.
+    static void returnFlow(String itemType) {
+        String tag = "[" + itemType.toUpperCase() + "]";
+
+        System.out.print(tag + " Enter member ID: ");
+        String memberId = scanner.nextLine();
+        Member member = findMemberById(memberId);
+        if (member == null) {
+            System.out.println(tag + " Member not found.");
+            return;
+        }
+
+        List<LibraryItem> borrowed = new ArrayList<>();
+        for (LibraryItem item : member.getBorrowedItems()) {
+            if (item.getItemType().equalsIgnoreCase(itemType)) {
+                borrowed.add(item);
+            }
+        }
+
+        if (borrowed.isEmpty()) {
+            System.out.println(tag + " " + member.getName() + " has no " + itemType.toLowerCase() + "s checked out.");
+            return;
+        }
+
+        System.out.println("Borrowed " + itemType.toLowerCase() + "s:");
+        for (int i = 0; i < borrowed.size(); i++) {
+            LibraryItem item = borrowed.get(i);
+            System.out.println("    " + (i + 1) + ". " + item.getTitle() + " [" + item.getId() + "]");
+        }
+
+        System.out.print("Select a number to return (or 0 to cancel): ");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println(tag + " Invalid number.");
+            return;
+        }
+        if (choice == 0) return;
+        if (choice < 1 || choice > borrowed.size()) {
+            System.out.println(tag + " Number out of range.");
+            return;
+        }
+
+        System.out.print("Days late (0 if on time): ");
+        int daysLate;
+        try {
+            daysLate = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println(tag + " Invalid number. Assuming 0.");
+            daysLate = 0;
+        }
+        if (daysLate < 0) daysLate = 0;
+
+        LibraryItem selected = borrowed.get(choice - 1);
+
+        double before = member.getOutstandingFees();
+        member.returnItem(selected, daysLate);
+        double charged = member.getOutstandingFees() - before;
+
+        if (charged > 0) {
+            System.out.println(tag + " Returned. Late fee: $" + charged + ". Outstanding: $" + member.getOutstandingFees());
+        } else {
+            System.out.println(tag + " Returned on time. Thanks!");
         }
     }
 
