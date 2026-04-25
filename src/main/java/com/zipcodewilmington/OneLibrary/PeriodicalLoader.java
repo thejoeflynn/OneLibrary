@@ -134,6 +134,8 @@ public class PeriodicalLoader {
 
     PeriodicalLoader loader = new PeriodicalLoader();
     Library library = new Library();
+    PeriodicalLoader loader = new PeriodicalLoader();
+    Library library = new Library();
 
     loader.loadTitles("src/main/java/com/zipcodewilmington/OneLibrary/periodical-titles.csv");
     loader.loadIssues("src/main/java/com/zipcodewilmington/OneLibrary/periodical-issues.csv", library);
