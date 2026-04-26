@@ -12,6 +12,11 @@ public class MainApplication {
 
     public static void main(String[] args) {
         loadMembers();
+        new DataLoader().loadAll(library);
+
+        // TEMPORARY DEBUG
+        System.out.println("Items loaded: " + library.getItems().size());
+
         welcomeScreen();
     }
 
@@ -81,23 +86,37 @@ public class MainApplication {
         
     }
 
+//===============
+// BOOKS SCREEN
+//===============
+
     static void booksScreen() {
         while (true) { 
             System.out.println("[BOOKS] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     ___________      _____________      _____________      _____________      _________ ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return   |    | 5. Home |");
-            System.out.println("    |___________|    |_____________|    |_____________|    |_____________|    |_________|");
+            System.out.println("     ___________      _____________      _____________      _____________      _________     ");
+            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return   |    | 5. Home |    ");
+            System.out.println("    |___________|    |_____________|    |_____________|    |_____________|    |_________|    ");
             System.out.println(" ");
             System.out.println("> ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    System.out.println("[BOOKS] Search coming soon.");
+                    searchFlow("Book");
                     break;
                 case "2":
-                    System.out.println("[BOOKS] View All coming soon."); 
+                    System.out.println("[BOOKS] Showing all books:");
+                    for (LibraryItem item : library.getItems()) {
+                        if (item.getItemType().equalsIgnoreCase("Book")) {
+                            String avail = item.isAvailable() ? "Available" : "Out";
+                            String reserved = item.isReserved() ? " [RESERVED]" : "";
+                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                        }
+                    }
+                    System.out.println("Press 'RETURN' to continue.");
+                    System.out.println("> ");
+                    String input = scanner.nextLine();
                     break;
                 case "3":
                     checkoutFlow("Book");
@@ -114,11 +133,15 @@ public class MainApplication {
         }
     }
 
+//===============
+// DVDs SCREEN
+//===============
+ 
     static void dvdsScreen() {
         while (true) { 
             System.out.println("[DVDs] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     ___________      _____________      _____________      ____________    _________ ");
+            System.out.println("     ___________      _____________      _____________      ____________      _________ ");
             System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
             System.out.println("    |___________|    |_____________|    |_____________|    |____________|    |_________| ");
             System.out.println(" ");
@@ -127,10 +150,20 @@ public class MainApplication {
 
             switch (choice) {
                 case "1":
-                    System.out.println("[DVDs] Search coming soon.");
+                    searchFlow("DVD");
                     break;
                 case "2":
-                    System.out.println("[DVDs] View All coming soon."); 
+                    System.out.println("[DVDs] Showing all DVDs:");
+                    for (LibraryItem item : library.getItems()) {
+                        if (item.getItemType().equalsIgnoreCase("DVD")) {
+                            String avail = item.isAvailable() ? "Available" : "Out";
+                            String reserved = item.isReserved() ? " [RESERVED]" : "";
+                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                        }
+                    }
+                    System.out.println("Press 'RETURN' to continue.");
+                    System.out.println("> ");
+                    String input = scanner.nextLine();
                     break;
                 case "3":
                     checkoutFlow("DVD");
@@ -147,6 +180,10 @@ public class MainApplication {
         }
     }
 
+//======================
+// PERIODICALS SCREEN
+//======================
+
     static void periodicalsScreen() {
         while (true) { 
             System.out.println("[PERIODICALS] Type a number to select an option");
@@ -160,10 +197,17 @@ public class MainApplication {
 
             switch (choice) {
                 case "1":
-                    System.out.println("[PERIODICALS] Search coming soon.");
+                    searchFlow("Periodical");
                     break;
                 case "2":
-                    System.out.println("[PERIODICALS] View All coming soon."); 
+                    System.out.println("[PERIODICALS] Showing all periodicals:"); 
+                    for (LibraryItem item : library.getItems()) {
+                        if (item.getItemType().equalsIgnoreCase("Periodical")){
+                            String avail = item.isAvailable() ? "Available" : "Out";
+                            String reserved = item.isReserved() ? " [RESERVED" : "";
+                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                        }
+                    }
                     break;
                 case "3":
                     checkoutFlow("Periodical");
@@ -321,17 +365,6 @@ public class MainApplication {
         }
     }
 
-    static void loadBooks() {
-        try {
-            java.io.File file = new java.io.File("//FILENAME");
-            if (!file.exists()) return;
-            
-        } catch (Exception e) {
-            System.out.println("[ONELIBRARY] Error loading Books.");
-        }
-        
-    }
-
     // Finds a member by ID. Returns null if not found.
     static Member findMemberById(String id) {
         for (Member m : members) {
@@ -342,9 +375,7 @@ public class MainApplication {
         return null;
     }
 
-    // Generic checkout flow. Pass "Book", "DVD", or "Periodical" to scope it.
-    // Assumes each subclass's getItemType() returns that exact string -- confirm
-    // when you look at Book.java / DVD.java / Periodical.java.
+    // Checkout flow going with the flow yeah. Pass "Book", "DVD", or "Periodical" to scope it.
     static void checkoutFlow(String itemType) {
         String tag = "[" + itemType.toUpperCase() + "]";
 
@@ -467,6 +498,91 @@ public class MainApplication {
             System.out.println(tag + " Returned. Late fee: $" + charged + ". Outstanding: $" + member.getOutstandingFees());
         } else {
             System.out.println(tag + " Returned on time. Thanks!");
+        }
+    }
+
+    // Generic search/view-all flow. Empty keyword = view all.
+    static void searchFlow(String itemType) {
+        String tag = "[" + itemType.toUpperCase() + "]";
+
+        System.out.print("Enter search keyword (or press RETURN for all " + itemType + "s): ");
+        String keyword = scanner.nextLine();
+
+        List<LibraryItem> results = new ArrayList<>();
+        for (LibraryItem item : library.getItems()) {
+            if (!item.getItemType().equalsIgnoreCase(itemType)) continue;
+            if (keyword.isEmpty() || item.matchesKeyword(keyword)) {
+            results.add(item);
+            }
+        }
+
+        if (results.isEmpty()) {
+            System.out.println(tag + " No matching " + itemType.toLowerCase() + "s found.");
+            return;
+        }
+
+        System.out.println("Results (" + results.size() + "):");
+        for (LibraryItem item : results) {
+            String avail = item.isAvailable() ? "Available" : "Out";
+            String reserved = item.isReserved() ? " [RESERVED]" : "";
+            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+        }
+    }
+
+    // Toggles reservation. If item is reserved, asks to cancel; if not, asks to reserve.
+    static void reserveFlow(String itemType) {
+        String tag = "[" + itemType.toUpperCase() + "]";
+
+        System.out.print("Enter search keyword to find item: ");
+        String keyword = scanner.nextLine();
+
+        List<LibraryItem> candidates = new ArrayList<>();
+        for (LibraryItem item : library.getItems()) {
+            if (!item.getItemType().equalsIgnoreCase(itemType)) continue;
+            if (keyword.isEmpty() || item.matchesKeyword(keyword)) {
+                candidates.add(item);
+            }
+        }
+
+        if (candidates.isEmpty()) {
+            System.out.println(tag + " No matching " + itemType.toLowerCase() + "s found.");
+            return;
+        }
+
+        System.out.println("Results:");
+        for (int i = 0; i < candidates.size(); i++) {
+            LibraryItem item = candidates.get(i);
+            String reserved = item.isReserved() ? " [RESERVED]" : "";
+            System.out.println("    " + (i + 1) + ". " + item.getTitle() + " [" + item.getId() + "]" + reserved);
+        }
+
+        System.out.print("Select a number (or 0 to cancel): ");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println(tag + " Invalid number.");
+            return;
+        }
+        if (choice == 0) return;
+        if (choice < 1 || choice > candidates.size()) {
+            System.out.println(tag + " Number out of range.");
+            return;
+        }
+
+        LibraryItem selected = candidates.get(choice - 1);
+        if (selected.isReserved()) {
+            System.out.print("This item is currently reserved. Cancel reservation? (y/n): ");
+            if (scanner.nextLine().equalsIgnoreCase("y")) {
+                selected.cancelReserve();
+                System.out.println(tag + " Reservation cancelled for " + selected.getTitle() + ".");
+            }
+        } else {
+            System.out.print("Reserve " + selected.getTitle() + "? (y/n): ");
+            if (scanner.nextLine().equalsIgnoreCase("y")) {
+                selected.reserve();
+                System.out.println(tag + " " + selected.getTitle() + " reserved.");
+            }
         }
     }
 

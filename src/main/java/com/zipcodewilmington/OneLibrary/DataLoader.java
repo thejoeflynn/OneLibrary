@@ -12,12 +12,14 @@ public class DataLoader {
     // LOAD ALL
     // =========================
     public void loadAll(Library library) {
-        loadBooks("books.csv", library);
-        loadDVDs("dvds.csv", library);
+    String basePath = "src/main/java/com/zipcodewilmington/OneLibrary/DATA/";
+    loadBooks(basePath + "Book.csv", library);
+    loadDVDs(basePath + "DVD.csv", library);
+    loadPeriodicals(basePath + "Periodical.csv", library);
 
-        // Periodicals use two files
-        loadPeriodicalTitles("periodical-titles.csv");
-        loadPeriodicalIssues("periodical-issues.csv", library);
+        // Periodical Temporarily disabled to get the thing working
+        //loadPeriodicalTitles("periodical-titles.csv");
+        //loadPeriodicalIssues("periodical-issues.csv", library);
     }
  
     // =========================
@@ -85,7 +87,7 @@ public class DataLoader {
 
                 String[] parts = line.split(",", -1);
 
-                if (parts.length < 7) {
+                if (parts.length < 6) {
                     System.out.println("Skipping invalid DVD row: " + line);
                     continue;
                 }
@@ -94,19 +96,19 @@ public class DataLoader {
                 String title = parts[1].trim();
                 String location = parts[2].trim();
                 String director = parts[3].trim();
-                String durationStr = parts[4].trim();
-                String rating = parts[5].trim();
-                String genre = parts[6].trim();
+                //String durationStr = parts[4].trim();
+                String rating = parts[4].trim();
+                String genre = parts[5].trim();
 
                 try {
-                    int duration = Integer.parseInt(durationStr);
+                    //int duration = Integer.parseInt(durationStr);
 
                     DVD dvd = new DVD(
                             id,
                             title,
                             location,
                             director,
-                            duration,
+                            0,
                             rating,
                             genre
                     );
@@ -123,6 +125,57 @@ public class DataLoader {
         }
     }  
     
+    // =========================
+    // PERIODICAL COMBINED
+    // =========================
+
+    private void loadPeriodicals(String filePath, Library library) {
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String line;
+        br.readLine(); // skip header
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(",", -1);
+            if (parts.length < 8) {
+                System.out.println("Skipping invalid periodical row: " + line);
+                continue;
+            }
+
+            String id = parts[0].trim();
+            String title = parts[1].trim();
+            String location = parts[2].trim();
+            String publisher = parts[3].trim();
+            String issn = parts[4].trim();
+            String volumeStr = parts[5].trim();
+            String issueStr = parts[6].trim();
+            String publicationDate = parts[7].trim();
+
+            try {
+                int volume = Integer.parseInt(volumeStr);
+                int issueNumber = Integer.parseInt(issueStr);
+
+                Periodical p = new Periodical(
+                        id,
+                        title,
+                        location,
+                        publisher,
+                        issn,
+                        volume,
+                        issueNumber,
+                        publicationDate
+                );
+
+                library.addItem(p);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number in periodical row: " + line);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+
     // =========================
     // PERIODICAL TITLES
     // =========================
