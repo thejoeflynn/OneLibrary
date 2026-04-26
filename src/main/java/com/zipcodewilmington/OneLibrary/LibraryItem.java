@@ -1,10 +1,11 @@
 package com.zipcodewilmington.OneLibrary;
 
-public abstract class LibraryItem implements Searchable {
+public abstract class LibraryItem implements Searchable, Reservable {
     private String id;
     private String title;
     private String location;
     private boolean isAvailable;
+    private boolean isReserved;
 
     // I need this for my periodical class but cant figure out how to get it to work correctly 
 
@@ -86,6 +87,20 @@ public abstract class LibraryItem implements Searchable {
 
     public abstract String getItemType();
 
-    
+    @Override
+    public void reserve() {
+        isReserved = true;
     }
+
+    @Override
+    public void cancelReserve() {
+        isReserved = false;
+    }
+
+    @Override
+    public boolean isReserved() {
+        return isReserved;
+    }
+    
+}
 

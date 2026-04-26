@@ -1,12 +1,11 @@
 package com.zipcodewilmington.OneLibrary;
 
-public class DVD extends LibraryItem implements Reservable {
+public class DVD extends LibraryItem {
 
     private String director;
     private String rating;
     private String genre;
     private int duration;
-    private boolean isReserved;
 
     public DVD(String id, String title, String location,
             String director, int duration, String rating, String genre) {
@@ -49,18 +48,5 @@ public class DVD extends LibraryItem implements Reservable {
     public int getDuration() {
         return duration;
     }
-
-    @Override
-    public void reserve() {
-        isReserved = true;
-    }
-
-    @Override
-    public void cancelReserve() {
-        isReserved = false;
-    }
-
-    public boolean isReserved() {
-        return isReserved;
-    }
+    
 }
