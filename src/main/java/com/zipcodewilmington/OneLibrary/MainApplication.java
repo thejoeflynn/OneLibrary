@@ -111,7 +111,7 @@ public class MainApplication {
                         if (item.getItemType().equalsIgnoreCase("Book")) {
                             String avail = item.isAvailable() ? "Available" : "Out";
                             String reserved = item.isReserved() ? " [RESERVED]" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                            System.out.println(item);
                         }
                     }
                     System.out.println("Press 'RETURN' to continue.");
@@ -158,7 +158,7 @@ public class MainApplication {
                         if (item.getItemType().equalsIgnoreCase("DVD")) {
                             String avail = item.isAvailable() ? "Available" : "Out";
                             String reserved = item.isReserved() ? " [RESERVED]" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                            System.out.println(item);
                         }
                     }
                     System.out.println("Press 'RETURN' to continue.");
@@ -205,7 +205,7 @@ public class MainApplication {
                         if (item.getItemType().equalsIgnoreCase("Periodical")){
                             String avail = item.isAvailable() ? "Available" : "Out";
                             String reserved = item.isReserved() ? " [RESERVED" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+                            System.out.println(item);
                         }
                     }
                     break;

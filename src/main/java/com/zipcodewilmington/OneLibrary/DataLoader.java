@@ -3,8 +3,6 @@ package com.zipcodewilmington.OneLibrary;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DataLoader {
 
@@ -167,122 +165,13 @@ public class DataLoader {
 
                 library.addItem(p);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid number in periodical row: " + line);
+                //System.out.println("Invalid number in periodical row: " + line);
             }
         }
     } catch (IOException e) {
         e.printStackTrace();
     }
 }
-
-
-    // =========================
-    // PERIODICAL TITLES
-    // =========================
-    
-    private Map<String, Periodical> periodicalTitles = new HashMap<>();
-
-    private void loadPeriodicalTitles(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
-        String line;
-        br.readLine();
-
-        while ((line = br.readLine()) != null) {
-
-            String[] parts = line.split(",", -1);
-
-            if (parts.length < 4) {
-                System.out.println("Skipping invalid title row: " + line);
-                continue;
-            }
-
-            String id = parts[0].trim();
-            String title = parts[1].trim();
-            String location = parts[2].trim();
-            String publisher = parts[3].trim();
-
-            Periodical p = new Periodical(
-                    id,
-                    title,
-                    location,
-                    publisher,
-                    "",
-                    0,
-                    0,
-                    ""
-            );
-
-            periodicalTitles.put(id, p);
-        }
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-
-    // =========================
-    // LOAD PERIODICAL ISSUES
-    // =========================
-    private void loadPeriodicalIssues(String filePath, Library library) {
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
-            String line;
-            br.readLine();  // Skip header
-
-            while ((line = br.readLine()) != null) {
-
-                String[] parts = line.split(",", -1);
-
-                if (parts.length < 6) {
-                    System.out.println("Skipping invalid issue row: " + line);
-                    continue;
-                }
-
-                String id = parts[0].trim();
-                String volumeStr = parts[3].trim();
-                String issueStr = parts[4].trim();
-                String date = parts[5].trim();
-
-                try {
-                    int volume = Integer.parseInt(volumeStr);
-                    int issue = Integer.parseInt(issueStr);
-
-                    Periodical base = periodicalTitles.get(id);
-
-                    if (base == null) {
-                        System.out.println("Missing title for id: " + id);
-                        continue;
-                    }
-
-                    // Full issue object
-                    Periodical periodical = new Periodical(
-                            id + "-V" + volume + "I" + issue,
-                            base.getTitle(),
-                            base.getLocation(),
-                            base.getPublisher(),
-                            "",  
-                            volume,
-                            issue,
-                            date
-                    );
-
-                    library.addItem(periodical);
-
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number in row: " + line);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Map<String, Periodical> getTitles() {
-    return new HashMap<>(periodicalTitles);
-    }
 
     public static void main(String[] args) {
         DataLoader loader = new DataLoader();
