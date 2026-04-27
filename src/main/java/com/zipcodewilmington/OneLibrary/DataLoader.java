@@ -34,7 +34,7 @@ public class DataLoader {
             br.readLine(); // skip header
 
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", -1);
+                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 if (parts.length < 7) {
                     System.out.println("Skipping invalid book row: " + line);
                     continue;
@@ -85,7 +85,7 @@ public class DataLoader {
 
             while ((line = br.readLine()) != null) {
 
-                String[] parts = line.split(",", -1);
+                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
                 if (parts.length < 6) {
                     System.out.println("Skipping invalid DVD row: " + line);
@@ -135,7 +135,7 @@ public class DataLoader {
         br.readLine(); // skip header
 
         while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",", -1);
+            String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             if (parts.length < 8) {
                 System.out.println("Skipping invalid periodical row: " + line);
                 continue;
