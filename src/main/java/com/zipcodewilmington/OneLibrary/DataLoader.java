@@ -1,8 +1,10 @@
 package com.zipcodewilmington.OneLibrary;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class DataLoader {
 
@@ -26,15 +28,14 @@ public class DataLoader {
     
     private void loadBooks(String filePath, Library library) {
         
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
             
-            String line;
-            br.readLine(); // skip header
+            String[] parts;
+            reader.readNext(); 
 
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            while ((parts = reader.readNext()) != null) {
                 if (parts.length < 7) {
-                    System.out.println("Skipping invalid book row: " + line);
+                    System.out.println("Skipping invalid book row");
                     continue;
                 }
 
@@ -62,10 +63,10 @@ public class DataLoader {
                     library.addItem(book);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid number in row: " + line);
+                    System.out.println("Invalid number in row: ");
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
@@ -76,17 +77,15 @@ public class DataLoader {
                  
      private void loadDVDs(String filePath, Library library) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-            String line;
-            br.readLine();  // Skip header
+            String[] parts;
+            reader.readNext(); 
 
-            while ((line = br.readLine()) != null) {
-
-                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            while ((parts = reader.readNext()) != null) {
 
                 if (parts.length < 6) {
-                    System.out.println("Skipping invalid DVD row: " + line);
+                    System.out.println("Skipping invalid DVD row: ");
                     continue;
                 }
 
@@ -114,11 +113,11 @@ public class DataLoader {
                     library.addItem(dvd);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid duration in row: " + line);
+                    System.out.println("Invalid duration in row: ");
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }  
@@ -128,14 +127,14 @@ public class DataLoader {
     // =========================
 
     private void loadPeriodicals(String filePath, Library library) {
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        br.readLine(); // skip header
+    try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            String[] parts;
+            reader.readNext(); 
+
+            while ((parts = reader.readNext()) != null) {
             if (parts.length < 8) {
-                System.out.println("Skipping invalid periodical row: " + line);
+                System.out.println("Skipping invalid periodical row: ");
                 continue;
             }
 
@@ -168,7 +167,7 @@ public class DataLoader {
                 //System.out.println("Invalid number in periodical row: " + line);
             }
         }
-    } catch (IOException e) {
+    } catch (IOException | CsvValidationException e) {
         e.printStackTrace();
     }
 }
