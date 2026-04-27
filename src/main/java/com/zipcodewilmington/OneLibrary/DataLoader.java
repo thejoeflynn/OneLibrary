@@ -1,21 +1,21 @@
 package com.zipcodewilmington.OneLibrary;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class DataLoader {
 
-    // =========================
-    // LOAD ALL
-    // =========================
+    
     public void loadAll(Library library) {
     String basePath = "src/main/java/com/zipcodewilmington/OneLibrary/DATA/";
     loadBooks(basePath + "Book.csv", library);
     loadDVDs(basePath + "DVD.csv", library);
     loadPeriodicals(basePath + "Periodical.csv", library);
+    loadMusic(basePath + "Music.csv", library);
+    
 
         // Periodical Temporarily disabled to get the thing working
         //loadPeriodicalTitles("periodical-titles.csv");
@@ -28,15 +28,14 @@ public class DataLoader {
     
     private void loadBooks(String filePath, Library library) {
         
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
             
-            String line;
-            br.readLine(); // skip header
+            String[] parts;
+            reader.readNext(); 
 
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", -1);
+            while ((parts = reader.readNext()) != null) {
                 if (parts.length < 7) {
-                    System.out.println("Skipping invalid book row: " + line);
+                    System.out.println("Skipping invalid book row");
                     continue;
                 }
 
@@ -64,10 +63,10 @@ public class DataLoader {
                     library.addItem(book);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid number in row: " + line);
+                    System.out.println("Invalid number in row: ");
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
@@ -78,17 +77,15 @@ public class DataLoader {
                  
      private void loadDVDs(String filePath, Library library) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-            String line;
-            br.readLine();  // Skip header
+            String[] parts;
+            reader.readNext(); 
 
-            while ((line = br.readLine()) != null) {
-
-                String[] parts = line.split(",", -1);
+            while ((parts = reader.readNext()) != null) {
 
                 if (parts.length < 6) {
-                    System.out.println("Skipping invalid DVD row: " + line);
+                    System.out.println("Skipping invalid DVD row: ");
                     continue;
                 }
 
@@ -116,11 +113,11 @@ public class DataLoader {
                     library.addItem(dvd);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid duration in row: " + line);
+                    System.out.println("Invalid duration in row: ");
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }  
@@ -130,14 +127,14 @@ public class DataLoader {
     // =========================
 
     private void loadPeriodicals(String filePath, Library library) {
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        br.readLine(); // skip header
+    try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",", -1);
+            String[] parts;
+            reader.readNext(); 
+
+            while ((parts = reader.readNext()) != null) {
             if (parts.length < 8) {
-                System.out.println("Skipping invalid periodical row: " + line);
+                System.out.println("Skipping invalid periodical row: ");
                 continue;
             }
 
@@ -167,122 +164,66 @@ public class DataLoader {
 
                 library.addItem(p);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid number in periodical row: " + line);
+                //System.out.println("Invalid number in periodical row: " + line);
             }
         }
-    } catch (IOException e) {
+    } catch (IOException | CsvValidationException e) {
         e.printStackTrace();
     }
 }
 
-
     // =========================
-    // PERIODICAL TITLES
+    // LOAD MUSIC 
     // =========================
-    
-    private Map<String, Periodical> periodicalTitles = new HashMap<>();
 
-    private void loadPeriodicalTitles(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    private void loadMusic(String filePath, Library library) {
 
-        String line;
-        br.readLine();
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-        while ((line = br.readLine()) != null) {
+        String[] parts;
+        reader.readNext(); // skip header
 
-            String[] parts = line.split(",", -1);
+        while ((parts = reader.readNext()) != null) {
 
-            if (parts.length < 4) {
-                System.out.println("Skipping invalid title row: " + line);
+            if (parts.length < 8) {
+                System.out.println("Skipping invalid music row");
                 continue;
             }
 
             String id = parts[0].trim();
             String title = parts[1].trim();
             String location = parts[2].trim();
-            String publisher = parts[3].trim();
+            String artist = parts[3].trim();
+            String date = parts[4].trim();
+            String genre = parts[5].trim();
+            String lyrics = parts[6].trim();
+            String lengthStr = parts[7].trim();
 
-            Periodical p = new Periodical(
-                    id,
-                    title,
-                    location,
-                    publisher,
-                    "",
-                    0,
-                    0,
-                    ""
-            );
+            try {
+                int length = Integer.parseInt(lengthStr);
 
-            periodicalTitles.put(id, p);
+                Music music = new Music(
+                        id,
+                        title,
+                        location,
+                        artist,
+                        date,
+                        genre,
+                        lyrics,
+                        length
+                );
+
+                library.addItem(music);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid length in music row");
+            }
         }
 
-    } catch (IOException e) {
+    } catch (IOException | CsvValidationException e) {
         e.printStackTrace();
     }
 }
-
-    // =========================
-    // LOAD PERIODICAL ISSUES
-    // =========================
-    private void loadPeriodicalIssues(String filePath, Library library) {
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
-            String line;
-            br.readLine();  // Skip header
-
-            while ((line = br.readLine()) != null) {
-
-                String[] parts = line.split(",", -1);
-
-                if (parts.length < 6) {
-                    System.out.println("Skipping invalid issue row: " + line);
-                    continue;
-                }
-
-                String id = parts[0].trim();
-                String volumeStr = parts[3].trim();
-                String issueStr = parts[4].trim();
-                String date = parts[5].trim();
-
-                try {
-                    int volume = Integer.parseInt(volumeStr);
-                    int issue = Integer.parseInt(issueStr);
-
-                    Periodical base = periodicalTitles.get(id);
-
-                    if (base == null) {
-                        System.out.println("Missing title for id: " + id);
-                        continue;
-                    }
-
-                    // Full issue object
-                    Periodical periodical = new Periodical(
-                            id + "-V" + volume + "I" + issue,
-                            base.getTitle(),
-                            base.getLocation(),
-                            base.getPublisher(),
-                            "",  
-                            volume,
-                            issue,
-                            date
-                    );
-
-                    library.addItem(periodical);
-
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number in row: " + line);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Map<String, Periodical> getTitles() {
-    return new HashMap<>(periodicalTitles);
-    }
 
     public static void main(String[] args) {
         DataLoader loader = new DataLoader();
