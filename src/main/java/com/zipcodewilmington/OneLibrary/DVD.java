@@ -31,6 +31,17 @@ public class DVD extends LibraryItem {
     }
 
     @Override
+    public String toString() {
+    return "ID: " + getId() + " | Title: " + getTitle() +
+           " | Location: " + getLocation() +
+           " | Director: " + director +
+           " | Duration: " + duration + 
+           " | Rating: " + rating +
+           " | Genre: " + genre +
+           " | " + (isAvailable() ? "Available" : "Unavailable");
+    }
+
+    @Override
     public double calculateLateFee(int daysLate) {
         return daysLate * 1.0;
     }

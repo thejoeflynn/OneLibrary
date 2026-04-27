@@ -501,7 +501,7 @@ public class MainApplication {
         }
     }
 
-    // Generic search/view-all flow. Empty keyword = view all.
+// Generic search/view-all flow. Empty keyword = view all.
     static void searchFlow(String itemType) {
         String tag = "[" + itemType.toUpperCase() + "]";
 
@@ -525,7 +525,8 @@ public class MainApplication {
         for (LibraryItem item : results) {
             String avail = item.isAvailable() ? "Available" : "Out";
             String reserved = item.isReserved() ? " [RESERVED]" : "";
-            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+            System.out.println(item.toString());
+            //System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + item.getLocation() + avail + reserved);
         }
     }
 
