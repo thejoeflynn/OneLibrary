@@ -19,6 +19,18 @@ public class Periodical extends LibraryItem {
         this.publicationDate = publicationDate; 
     }
 
+    @Override
+    public String toString() {
+    return "ID: " + getId() + " | Title: " + getTitle() +
+           " | Location: " + getLocation() +
+           " | Publisher: " + publisher +
+           " | ISSN: " + issn +
+           " | Volume: " + volume +
+           " | Issue Number: " + issueNumber +
+           " | Publication Date: " + publicationDate +
+           " | " + (isAvailable() ? "Available" : "Unavailable");
+    }
+
     public String getPublisher() {
         return publisher;
     }

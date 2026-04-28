@@ -15,7 +15,6 @@ public class DataLoader {
     loadDVDs(basePath + "DVD.csv", library);
     loadPeriodicals(basePath + "Periodical.csv", library);
     loadMusic(basePath + "Music.csv", library);
-    
 
         // Periodical Temporarily disabled to get the thing working
         //loadPeriodicalTitles("periodical-titles.csv");
@@ -172,58 +171,53 @@ public class DataLoader {
     }
 }
 
-    // =========================
-    // LOAD MUSIC 
-    // =========================
-
-    private void loadMusic(String filePath, Library library) {
+private void loadMusic(String filePath, Library library) {
 
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 
-        String[] parts;
-        reader.readNext(); // skip header
+            String[] parts;
+            reader.readNext(); 
 
-        while ((parts = reader.readNext()) != null) {
+            while ((parts = reader.readNext()) != null) {
 
-            if (parts.length < 8) {
-                System.out.println("Skipping invalid music row");
-                continue;
+                if (parts.length < 8) {
+                    System.out.println("Skipping invalid Music row: ");
+                    continue;
+                }
+
+                String id = parts[0].trim();
+                String title = parts[1].trim();
+                String location = parts[2].trim();
+                String artist = parts[3].trim();
+                String date = parts[4].trim();
+                String genre = parts[5].trim();
+                String lyrics = parts[6].trim();
+                String lengthA = parts[7].trim();
+
+                try {
+                    int length = Integer.parseInt(lengthA);
+                    Music music = new Music(
+                            id,
+                            title,
+                            location,
+                            artist,
+                            date,
+                            genre,
+                            lyrics,
+                            length
+                    );
+
+                    library.addItem(music);
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid duration in row: ");
+                }
             }
 
-            String id = parts[0].trim();
-            String title = parts[1].trim();
-            String location = parts[2].trim();
-            String artist = parts[3].trim();
-            String date = parts[4].trim();
-            String genre = parts[5].trim();
-            String lyrics = parts[6].trim();
-            String lengthStr = parts[7].trim();
-
-            try {
-                int length = Integer.parseInt(lengthStr);
-
-                Music music = new Music(
-                        id,
-                        title,
-                        location,
-                        artist,
-                        date,
-                        genre,
-                        lyrics,
-                        length
-                );
-
-                library.addItem(music);
-
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid length in music row");
-            }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
         }
-
-    } catch (IOException | CsvValidationException e) {
-        e.printStackTrace();
-    }
-}
+    }  
 
     public static void main(String[] args) {
         DataLoader loader = new DataLoader();

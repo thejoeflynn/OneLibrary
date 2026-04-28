@@ -34,9 +34,9 @@ public class MainApplication {
         while(true){
             System.out.println("[HOME] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     __________    _________     ________________     ____________      _________     ____________ ");
-            System.out.println("    | 1. Books |  | 2. DVDs |   | 3. Periodicals |   | 4. Members |    | 5. Help |   | 6. Log Out | ");
-            System.out.println("    |__________|  |_________|   |________________|   |____________|    |_________|   |____________| ");
+            System.out.println("     __________    _________     ________________     ____________      __________     __________    ____________ ");
+            System.out.println("    | 1. Books |  | 2. DVDs |   | 3. Periodicals |   | 4. Members |    | 5. Music |   | 6. HELP! |  | 7. Log Out |");
+            System.out.println("    |__________|  |_________|   |________________|   |____________|    |__________|   |__________|  |____________|");
             System.out.println(" ");
             System.out.print("> ");
             String choice = scanner.nextLine();
@@ -54,7 +54,10 @@ public class MainApplication {
                 case "4":
                     membersScreen();
                     break;
-                case "5" :
+                case "5":
+                    musicScreen();
+                    break;
+                case "6" :
                     System.out.println("[ONELIBRARY] No help for you!");
                     System.out.println("[ONELIBRARY] Ok maybe some help. To access any of the menus, type in a number.");
                     System.out.println("[ONELIBRARY] For example, if you type in '1' it will take you to the books page.");
@@ -63,7 +66,7 @@ public class MainApplication {
                     System.out.println("> ");
                     String memberID = scanner.nextLine();
                     break;
-                case "6" :
+                case "7" :
                     System.out.println("[ONELIBRARY] Are you sure you want to logout? Type 'Y' to confirm.");
                     System.out.println("> ");
                     String confirm = scanner.nextLine();
@@ -78,6 +81,9 @@ public class MainApplication {
                     System.out.println("> ");
                     String input = scanner.nextLine();
                     break;
+                case "kris":
+                    System.out.println("[ONELIBRARY] goodbye");
+                    System.exit(0);
                 default:
                     System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
                 break;
@@ -95,7 +101,7 @@ public class MainApplication {
             System.out.println("[BOOKS] Type a number to select an option");
             System.out.println(" ");
             System.out.println("     ___________      _____________      _____________      _____________      _________     ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return   |    | 5. Home |    ");
+            System.out.println("    | 1. Search |    | 2. Random 5 |    | 3. Checkout |    | 4. Return   |    | 5. Home |    ");
             System.out.println("    |___________|    |_____________|    |_____________|    |_____________|    |_________|    ");
             System.out.println(" ");
             System.out.println("> ");
@@ -104,19 +110,13 @@ public class MainApplication {
             switch (choice) {
                 case "1":
                     searchFlow("Book");
-                    break;
-                case "2":
-                    System.out.println("[BOOKS] Showing all books:");
-                    for (LibraryItem item : library.getItems()) {
-                        if (item.getItemType().equalsIgnoreCase("Book")) {
-                            String avail = item.isAvailable() ? "Available" : "Out";
-                            String reserved = item.isReserved() ? " [RESERVED]" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
-                        }
-                    }
                     System.out.println("Press 'RETURN' to continue.");
                     System.out.println("> ");
                     String input = scanner.nextLine();
+                    break;
+                case "2":
+                    System.out.println("[BOOKS] Showing random books!");
+                    printRandomBooks();
                     break;
                 case "3":
                     checkoutFlow("Book");
@@ -142,7 +142,7 @@ public class MainApplication {
             System.out.println("[DVDs] Type a number to select an option");
             System.out.println(" ");
             System.out.println("     ___________      _____________      _____________      ____________      _________ ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
+            System.out.println("    | 1. Search |    | 2. Random 5 |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
             System.out.println("    |___________|    |_____________|    |_____________|    |____________|    |_________| ");
             System.out.println(" ");
             System.out.println("> ");
@@ -153,17 +153,8 @@ public class MainApplication {
                     searchFlow("DVD");
                     break;
                 case "2":
-                    System.out.println("[DVDs] Showing all DVDs:");
-                    for (LibraryItem item : library.getItems()) {
-                        if (item.getItemType().equalsIgnoreCase("DVD")) {
-                            String avail = item.isAvailable() ? "Available" : "Out";
-                            String reserved = item.isReserved() ? " [RESERVED]" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
-                        }
-                    }
-                    System.out.println("Press 'RETURN' to continue.");
-                    System.out.println("> ");
-                    String input = scanner.nextLine();
+                    System.out.println("[DVDs] Showing random DVDs!");
+                    printRandomDVD();
                     break;
                 case "3":
                     checkoutFlow("DVD");
@@ -189,7 +180,7 @@ public class MainApplication {
             System.out.println("[PERIODICALS] Type a number to select an option");
             System.out.println(" ");
             System.out.println("     ___________      _____________      _____________      ___________      _________ ");
-            System.out.println("    | 1. Search |    | 2. View All |    | 3. Checkout |    | 4. Return |    | 5. Home | ");
+            System.out.println("    | 1. Search |    | 2. Random 5 |    | 3. Checkout |    | 4. Return |    | 5. Home | ");
             System.out.println("    |___________|    |_____________|    |_____________|    |___________|    |_________| ");
             System.out.println(" ");
             System.out.println("> ");
@@ -200,14 +191,8 @@ public class MainApplication {
                     searchFlow("Periodical");
                     break;
                 case "2":
-                    System.out.println("[PERIODICALS] Showing all periodicals:"); 
-                    for (LibraryItem item : library.getItems()) {
-                        if (item.getItemType().equalsIgnoreCase("Periodical")){
-                            String avail = item.isAvailable() ? "Available" : "Out";
-                            String reserved = item.isReserved() ? " [RESERVED" : "";
-                            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
-                        }
-                    }
+                    System.out.println("[PERIODICALS] Showing random periodicals!"); 
+                    printRandomPeriodical();
                     break;
                 case "3":
                     checkoutFlow("Periodical");
@@ -219,6 +204,44 @@ public class MainApplication {
                     return;
                 default:
                     System.out.println("[PERIODICALS] Unknown command.");
+            }
+
+        }
+    }
+
+    //=======
+    // MUSIC
+    //========
+
+    static void musicScreen() {
+        while (true) { 
+            System.out.println("[MUSIC] Type a number to select an option");
+            System.out.println(" ");
+            System.out.println("     ___________      _____________      _____________      ____________      _________ ");
+            System.out.println("    | 1. Search |    | 2. Random 5 |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
+            System.out.println("    |___________|    |_____________|    |_____________|    |____________|    |_________| ");
+            System.out.println(" ");
+            System.out.println("> ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    searchFlow("Music");
+                    break;
+                case "2":
+                    System.out.println("[MUSIC] Showing random songs!");
+                    printRandomMusic();
+                    break;
+                case "3":
+                    checkoutFlow("MUSIC");
+                    break;
+                case "4":
+                    returnFlow("MUSIC");
+                    break;
+                case "5":
+                    return;
+                default:
+                    System.out.println("[MUSIC] Unknown command.");
             }
 
         }
@@ -365,6 +388,94 @@ public class MainApplication {
         }
     }
 
+    static void printRandomBooks() {
+        List<Book> bookList = new ArrayList<>();
+
+        // collect only Book objects
+            for (LibraryItem item : library.getItems()) {
+            if (item instanceof Book) {
+            bookList.add((Book) item);
+            }
+        }
+
+        // shuffle list (random order)
+        java.util.Collections.shuffle(bookList);
+
+        System.out.println("[BOOKS] 5 Random Books:");
+
+        for (int i = 0; i < 5 && i < bookList.size(); i++) {
+            Book b = bookList.get(i);
+            System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getGenre()); 
+        }
+        
+    }
+
+    static void printRandomDVD() {
+        List<DVD> DVDList = new ArrayList<>();
+
+        // collect only Book objects
+            for (LibraryItem item : library.getItems()) {
+            if (item instanceof DVD) {
+            DVDList.add((DVD) item);
+            }
+        }
+
+        // shuffle list (random order)
+        java.util.Collections.shuffle(DVDList);
+
+        System.out.println("[DVDs] 5 Random DVDs:");
+
+        for (int i = 0; i < 5 && i < DVDList.size(); i++) {
+            DVD b = DVDList.get(i);
+            System.out.println(b); 
+        }
+        
+    }
+
+    static void printRandomPeriodical() {
+        List<Periodical> periodicalList = new ArrayList<>();
+
+        // collect only Book objects
+            for (LibraryItem item : library.getItems()) {
+            if (item instanceof Periodical) {
+            periodicalList.add((Periodical) item);
+            }
+        }
+
+        // shuffle list (random order)
+        java.util.Collections.shuffle(periodicalList);
+
+        System.out.println("[PERIODICALS] 5 Random Periodicals:");
+
+        for (int i = 0; i < 5 && i < periodicalList.size(); i++) {
+            Periodical b = periodicalList.get(i);
+            System.out.println(b); 
+        }
+        
+    }
+
+    static void printRandomMusic() {
+        List<Music> musicList = new ArrayList<>();
+
+        // collect only Book objects
+            for (LibraryItem item : library.getItems()) {
+            if (item instanceof Music) {
+            musicList.add((Music) item);
+            }
+        }
+
+        // shuffle list (random order)
+        java.util.Collections.shuffle(musicList);
+
+        System.out.println("[MUSIC] 5 Random songs:");
+
+        for (int i = 0; i < 5 && i < musicList.size(); i++) {
+            Music b = musicList.get(i);
+            System.out.println(b); 
+        }
+        
+    }
+
     // Finds a member by ID. Returns null if not found.
     static Member findMemberById(String id) {
         for (Member m : members) {
@@ -501,11 +612,12 @@ public class MainApplication {
         }
     }
 
-    // Generic search/view-all flow. Empty keyword = view all.
+// Generic search/view-all flow. Empty keyword = view all.
     static void searchFlow(String itemType) {
         String tag = "[" + itemType.toUpperCase() + "]";
 
-        System.out.print("Enter search keyword (or press RETURN for all " + itemType + "s): ");
+
+        System.out.print("Enter search keyword (or press RETURN for example " + itemType + "s): ");
         String keyword = scanner.nextLine();
 
         List<LibraryItem> results = new ArrayList<>();
@@ -525,7 +637,8 @@ public class MainApplication {
         for (LibraryItem item : results) {
             String avail = item.isAvailable() ? "Available" : "Out";
             String reserved = item.isReserved() ? " [RESERVED]" : "";
-            System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + avail + reserved);
+            System.out.println(item.toString());
+            //System.out.println("    " + item.getTitle() + " [" + item.getId() + "] - " + item.getLocation() + avail + reserved);
         }
     }
 
