@@ -34,9 +34,9 @@ public class MainApplication {
         while(true){
             System.out.println("[HOME] Type a number to select an option");
             System.out.println(" ");
-            System.out.println("     __________    _________     ________________     ____________      _________     ____________ ");
-            System.out.println("    | 1. Books |  | 2. DVDs |   | 3. Periodicals |   | 4. Members |    | 5. Help |   | 6. Log Out | ");
-            System.out.println("    |__________|  |_________|   |________________|   |____________|    |_________|   |____________| ");
+            System.out.println("     __________    _________     ________________     ____________      __________     __________    ____________ ");
+            System.out.println("    | 1. Books |  | 2. DVDs |   | 3. Periodicals |   | 4. Members |    | 5. Music |   | 6. HELP! |  | 7. Log Out |");
+            System.out.println("    |__________|  |_________|   |________________|   |____________|    |__________|   |__________|  |____________|");
             System.out.println(" ");
             System.out.print("> ");
             String choice = scanner.nextLine();
@@ -54,7 +54,10 @@ public class MainApplication {
                 case "4":
                     membersScreen();
                     break;
-                case "5" :
+                case "5":
+                    musicScreen();
+                    break;
+                case "6" :
                     System.out.println("[ONELIBRARY] No help for you!");
                     System.out.println("[ONELIBRARY] Ok maybe some help. To access any of the menus, type in a number.");
                     System.out.println("[ONELIBRARY] For example, if you type in '1' it will take you to the books page.");
@@ -63,7 +66,7 @@ public class MainApplication {
                     System.out.println("> ");
                     String memberID = scanner.nextLine();
                     break;
-                case "6" :
+                case "7" :
                     System.out.println("[ONELIBRARY] Are you sure you want to logout? Type 'Y' to confirm.");
                     System.out.println("> ");
                     String confirm = scanner.nextLine();
@@ -78,6 +81,9 @@ public class MainApplication {
                     System.out.println("> ");
                     String input = scanner.nextLine();
                     break;
+                case "kris":
+                    System.out.println("[ONELIBRARY] goodbye");
+                    System.exit(0);
                 default:
                     System.out.println("[ONELIBRARY] Unknown command. Type '5' for help.");
                 break;
@@ -198,6 +204,44 @@ public class MainApplication {
                     return;
                 default:
                     System.out.println("[PERIODICALS] Unknown command.");
+            }
+
+        }
+    }
+
+    //=======
+    // MUSIC
+    //========
+
+    static void musicScreen() {
+        while (true) { 
+            System.out.println("[MUSIC] Type a number to select an option");
+            System.out.println(" ");
+            System.out.println("     ___________      _____________      _____________      ____________      _________ ");
+            System.out.println("    | 1. Search |    | 2. Random 5 |    | 3. Checkout |    | 4. Return  |    | 5. Home | ");
+            System.out.println("    |___________|    |_____________|    |_____________|    |____________|    |_________| ");
+            System.out.println(" ");
+            System.out.println("> ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    searchFlow("Music");
+                    break;
+                case "2":
+                    System.out.println("[MUSIC] Showing random songs!");
+                    printRandomMusic();
+                    break;
+                case "3":
+                    checkoutFlow("MUSIC");
+                    break;
+                case "4":
+                    returnFlow("MUSIC");
+                    break;
+                case "5":
+                    return;
+                default:
+                    System.out.println("[MUSIC] Unknown command.");
             }
 
         }
@@ -405,6 +449,28 @@ public class MainApplication {
 
         for (int i = 0; i < 5 && i < periodicalList.size(); i++) {
             Periodical b = periodicalList.get(i);
+            System.out.println(b); 
+        }
+        
+    }
+
+    static void printRandomMusic() {
+        List<Music> musicList = new ArrayList<>();
+
+        // collect only Book objects
+            for (LibraryItem item : library.getItems()) {
+            if (item instanceof Music) {
+            musicList.add((Music) item);
+            }
+        }
+
+        // shuffle list (random order)
+        java.util.Collections.shuffle(musicList);
+
+        System.out.println("[MUSIC] 5 Random songs:");
+
+        for (int i = 0; i < 5 && i < musicList.size(); i++) {
+            Music b = musicList.get(i);
             System.out.println(b); 
         }
         
